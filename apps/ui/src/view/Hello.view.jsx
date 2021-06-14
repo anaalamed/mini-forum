@@ -9,7 +9,7 @@ const Hello = () => {
     const dispatch = useDispatch();
     return (
         <Box>
-            <button onClick={() => dispatch(clicked('Hello There'))}>Click Here!</button>
+            <button onClick={() => dispatch(clicked('Hello There!'))}>Click Here!</button>
             <p>{hello}</p>
         </Box>
     );

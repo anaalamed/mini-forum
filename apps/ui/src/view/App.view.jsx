@@ -1,8 +1,10 @@
 import React from "react";
 import styled from "styled-components";
-// import Post from "./Post.view";
 import Home from "./Home.view";
-import NoMatch from "./NoMatch.view"
+import SignUp from "./SignUp.view";
+import LogIn from "./LogIn.view";
+import NoMatch from "./NoMatch.view";
+import {colors} from "../styles/colors"
 
 import { BrowserRouter as Router, Route, Link, Switch } from "react-router-dom";
 
@@ -19,11 +21,19 @@ const Links = () => (
 const App = () => (
     <Router>
         <Box>
-            <div>
+            <h1>Mini Forum</h1>
+            <Menu>
                 <Links />
-            </div>
+                <Bar>
+                    <StyledLink to="signup">SignUp</StyledLink>
+                    <StyledLink to="login">LogIn</StyledLink>
+                </Bar>
+            </Menu>
+
             <Switch>
                 <Route exact path="/" component={Home} />
+                <Route path="/signup" component={SignUp} />
+                <Route path="/login" component={LogIn} />                
                 <Route component={NoMatch} />
             </Switch>
         </Box>
@@ -38,10 +48,23 @@ const Box = styled.div`
 `;
 
 const StyledLink = styled(Link)`
-  color: black;
-  padding 0px 5px;
-  background:#ccc;
+    color: black;
+    background: white;
+    padding 0.5rem;
+    margin: 1rem;
+    text-decoration: none;
+    border-radius: 10%;
 `;
+
+const Menu = styled.div`
+    display: flex;
+    background: #0c0c27;
+    justify-content: space-between;
+`
+
+const Bar = styled.div`
+    display: flex;
+`
 
 const Nav = styled.ul`
   display: flex;

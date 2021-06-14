@@ -13,31 +13,62 @@ const Post = () => {
   // const {} = useSelector(state => posts.state);
   //onClick={() => dispatch(comment())}
   return (
-    <Box>
-      <SinglePost>
-        <Content>Content: {fakePosts[0].content}</Content>
-        <PostData>
-        <Element>Author: {fakePosts[0].author}</Element>
-        <Element><input type="submit" class="Like" value="Like"/>Likes: {fakePosts[0].likes}</Element>
-        <Element><input type="text" /><input type="submit" class="Comment" value="Comment"/></Element>
-        <Element><button>View Comments</button></Element>
-        <Element>Uploaded: {fakePosts[0].timeOfUpload}</Element>
-        </PostData>
-      </SinglePost>
-    </Box>
+      <Box>
+          <Content>{fakePosts[0].content}</Content>
+          <Data>
+            <Author>{fakePosts[0].author}</Author>
+            <span>{fakePosts[0].timeOfUpload}</span>
+          </Data>
+
+          <PostData>
+            <Button>Likes: {fakePosts[0].likes}</Button>
+            <Button>Comments: {fakePosts[0].comments.length}</Button>
+          </PostData>
+
+          <Comment>
+              <input type="text" placeholder="Your comment..."/>
+              <ComButton>Comment</ComButton>
+          </Comment>
+      </Box>
+
   );
 };
 export default Post;
 
-const Box = styled.div`
-  height: 100%;
-  width: 100%;
-  font-family: "Roboto", sans-serif;
+  
+  const Box = styled.div`
+      width: 65%;
+      background: #ebebf9;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      // align-items: center;
+      border: 2px solid blue;
+      border-radius:10px;
+      &:hover {
+        background: #c4c4ed;
+        transition: 0.1s;
+      }
+      margin: 10px;
+  `;
+
+  const Content = styled.p`
+  font-size: 2rem;
+  color: #242475;
+  font-weight: bold;
+  padding: 1rem;
+  font-family: "Yanone Kaffeesatz";
+  margin: 0;
+  `;
+
+  const Data = styled.div`
   display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  padding:3px;
+  justify-content: space-between;
+  `;
+
+const Author = styled.div`
+font-size: 1rem;
+padding-left: 1rem;
 `;
 
 const PostData = styled.div`
@@ -45,25 +76,17 @@ display: flex;
 align-items: stretch;
 `;
 
-const Content = styled.p`
-display: flex;
-background: #ccc;
-align-items: center;
-justify-content: center;
-font-size: 2rem;
-border: 20px solid #EDFFEF;
-font-family: "Yanone Kaffeesatz";
-`;
 
-const Element = styled.p`
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
+const Button = styled.button`
+padding: 10px;
+`
+
+const Comment = styled.p`
+width: 50%;
   padding: 10px;
   margin: 3px;
-  background: #eee;
-  border: 1px solid black;
+  background: #9d9de1;
+  border: 1px solid #242475;
   &:hover {
     background: #FFFFFF;
     transition: 0.1s;
@@ -72,16 +95,11 @@ const Element = styled.p`
   font-family: "Yanone Kaffeesatz";
 `;
 
-const SinglePost = styled.div`
-  background: #EDFFEF;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  border: 2px solid pink;
-  border-radius:10px;
-  &:hover {
-    background: #FFFFFF;
-    transition: 0.1s;
-  }
-  margin:10px;
-`;
+const ComButton = styled.button`
+padding: 10px;
+margin: 0;
+border: 1px solid #242475;
+background: #242475;
+color: white;
+`
+
