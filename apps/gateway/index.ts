@@ -24,7 +24,7 @@ app.use('/api/posts', createProxyMiddleware({ target: 'http://localhost:4001', c
 app.use(['/api/users', '/api/me', '/api/register', '/api/change-password', '/api/login', '/api/logout'] , createProxyMiddleware({ target: 'http://localhost:4000', changeOrigin: true }));
 app.use(express.static('../ui/build'));
 app.get('*', (req, res) => {
-    res.sendFile(path.join(__dirname, '../ui/build/index.html'));
+    res.sendFile(path.join(__dirname, '.../ui/build/index.html'));
   })
 
 app.listen(process.env.PORT || 8080, () => console.log('Gateway app is running! on Port: ', process.env.PORT))

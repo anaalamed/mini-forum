@@ -1,45 +1,52 @@
 import React from "react";
 import styled from "styled-components";
 import Home from "./Home.view";
+import Comment from "./Comments.view";
 import SignUp from "./SignUp.view";
 import LogIn from "./LogIn.view";
 import NoMatch from "./NoMatch.view";
-import {colors} from "../styles/colors"
+import { colors } from "../styles/colors";
+import { useRoutes } from 'hookrouter';
 
 import { BrowserRouter as Router, Route, Link, Switch } from "react-router-dom";
+import Post from "./Post.view";
+
+const routes = {
+    '/': () => <Home />,
+    '/post/:postId': (postId) => <Post id={postId} />,
+    '/post/:postId/comments': () => <Comment />,
+    '/signup': () => <SignUp />,
+    '/login': () => <LogIn />
+};
 
 
-const Links = () => (
-    <Nav>
-        <li>
-            <StyledLink to="/">Home</StyledLink>
-            <StyledLink to="wrong">Wrong</StyledLink>
-        </li>
-    </Nav>
-);
+const App = () => {
+    const routeResult = useRoutes(routes);
 
-const App = () => (
-    <Router>
-        <Box>
-            <h1>Mini Forum</h1>
-            <Menu>
-                <Links />
-                <Bar>
-                    <StyledLink to="signup">SignUp</StyledLink>
-                    <StyledLink to="login">LogIn</StyledLink>
-                </Bar>
-            </Menu>
+    return (
+        <Router>
+            <Box>
+                <h1>Mini Forum</h1>
 
-            <Switch>
-                <Route exact path="/" component={Home} />
-                <Route path="/signup" component={SignUp} />
-                <Route path="/login" component={LogIn} />                
-                <Route component={NoMatch} />
-            </Switch>
-        </Box>
-    </Router>
+                {/* <Post id={postId}/> */}
 
-);
+                <Menu>
+                    <A href="/">Home</A>
+                    <A href="/api/me">Me</A>
+                    {/* <A href=""></A> */}
+                    {/* <A href=""></A> */}
+
+                    <A href="signup">SignUp</A>
+                    <A href="login">Log In</A>
+
+                </Menu>
+            </Box>
+            {routeResult || <NoMatch />}
+        </Router>
+
+    )
+
+};
 export default App;
 
 const Box = styled.div`
@@ -47,10 +54,10 @@ const Box = styled.div`
   align-items: center;
 `;
 
-const StyledLink = styled(Link)`
+const A = styled.a`
     color: black;
     background: white;
-    padding 0.5rem;
+    padding: 0.5rem;
     margin: 1rem;
     text-decoration: none;
     border-radius: 10%;
@@ -62,16 +69,5 @@ const Menu = styled.div`
     justify-content: space-between;
 `
 
-const Bar = styled.div`
-    display: flex;
-`
 
-const Nav = styled.ul`
-  display: flex;
-  list-style-type: none;
-  font-family: "Yanone Kaffeesatz";
-  font-weight: 400;
-  font-size: 1.5rem;
-  width: 15rem;
-  justify-content: space-between;
-`;
+

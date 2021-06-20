@@ -1,4 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
+import { getPosts } from '../api/posts.api';
+
 
 const postsSlice = createSlice({
   name: "posts",
@@ -8,14 +10,20 @@ const postsSlice = createSlice({
     error_msg: "",
   },
   reducers: {
-    // posts_are_ready(state, action) {
-    //   data = action.payload;
-    //   isLoading = false;
-    //   error_msg = "";
-    // }
-
+    posts_fetched: (state, action) => {
+      state.data = action.payload;
+      state.isLoading = false;
+    }
   }
 });
 
 export default postsSlice.reducer;
-export const {} = postsSlice.actions;
+const { posts_fetched } = postsSlice.actions;
+
+
+export const fetchPosts = () => async (dispatch) => {
+  const data = await getPosts();
+  dispatch(posts_fetched(data));
+}
+
+

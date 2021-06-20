@@ -12,7 +12,10 @@ const GlobalStyles = createGlobalStyle`
   h1 {
     color: white;
     text-align: center;
-    margin: 2rem
+    margin: 1rem;
+  font-family: cursive;
+  font-size: 3rem;
+
   }
 
   button {

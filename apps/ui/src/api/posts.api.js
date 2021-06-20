@@ -1,23 +1,18 @@
 export const getPosts = async () => {
-    const response = await fetch("/api/posts");
-    return response.json();
+    const response = await fetch("https://mini-forum1.herokuapp.com/api/posts");
+    return await response.json();
 };
 
+
+// --------------------- fake post ----------------
 const DateNow = Date.now(); 
 
-export const fakePosts = [
+export const fpost = [
     {
-        content:'I want vacation and sea!',
+        content:'** The fake post ** I want sea and a vacation!',
         author: 'Ana Levit',
         likes: '3',
         comments: ["ananakdcndcj", "njcndscj"],
         timeOfUpload: new Date(DateNow).toString().substr(4, 17)
-    },
-    {
-        content:'post2',
-        author: 'Ana',
-        likes: '3',
-        comments: ['ananaaff'],
-        timeOfUpload: new Date(DateNow).toString().substr(4, 11)
     }
 ]
