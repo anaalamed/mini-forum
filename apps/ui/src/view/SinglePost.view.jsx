@@ -4,39 +4,47 @@ import { useSelector, useDispatch } from "react-redux";
 // import { comment } from "../state/posts.slice"
 
 
-const Post = (post) => {
+const SinglePost = (id) => {
   // const dispatch = useDispatch();
   const { data, isLoading } = useSelector(state => state.posts);
+  console.log(id.id.postId);
+  const post = data.find(post => post._id === id.id.postId);
+  console.log(post);
   //onClick={() => dispatch(comment())}
 
   if (isLoading) return <h1>Loading data...</h1>;
 
   return (
     <Box>
-      <Content>{post.content}</Content>
-      <p>id: {post._id}</p>
 
-      <Data>
-        <Author>{post.author}</Author>
-        <span>{String(post.created).substr(0, 10) + '\xa0\xa0\xa0\xa0' + String(post.created).substr(11, 5)}</span>
-      </Data>
 
-      <PostData>
-        <Button>Likes: {post.likes}</Button>
-        <Button>
-          <A href="comments">Comments: {post.comments?.length}</A>
-        </Button>
-      </PostData>
+      <Post>
+        <Content>{post.content}</Content>
+        <p>{post._id}</p>
 
-      <Comment>
-        <input type="text" placeholder="Your comment..." />
-        <ComButton>Comment</ComButton>
-      </Comment>
+        <Data>
+          <Author>{post.author}</Author>
+          <span>{String(post.created).substr(0, 10) + '\xa0\xa0\xa0\xa0' + String(post.created).substr(11, 5)}</span>
+        </Data>
+
+        <PostData>
+          <Button>Likes: {post.likes}</Button>
+          <Button>
+            <A href="/comments">Comments: {post.comments?.length}</A>
+
+          </Button>
+        </PostData>
+
+        <Comment>
+          <input type="text" placeholder="Your comment..." />
+          <ComButton>Comment</ComButton>
+        </Comment>
+      </Post>
     </Box>
 
   );
 };
-export default Post;
+export default SinglePost;
 
 
 const A = styled.a`
@@ -50,6 +58,13 @@ const A = styled.a`
 `;
 
 const Box = styled.div`
+  font-family: "Roboto", sans-serif;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  `;
+
+const Post = styled.div`
       width: 65%;
       background: #ebebf9;
       display: flex;

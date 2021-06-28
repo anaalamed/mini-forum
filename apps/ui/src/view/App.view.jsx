@@ -12,11 +12,13 @@ import { useRoutes } from 'hookrouter';
 
 import { BrowserRouter as Router, Route, Link, Switch } from "react-router-dom";
 import Post from "./Post.view";
+import SinglePost from "./SinglePost.view";
+
 
 const routes = {
     '/': () => <Home />,
-    '/post/:postId': (postId) => <Post id={postId} />,
-    '/post/:postId/comments': () => <Comment />,
+    '/post/:postId': (postId) => <SinglePost id={postId} />,
+    '/post/:postId/comments': (postId) => <Comment id={postId} />,
     '/comments': () => <Comment />,
     '/signup': () => <SignUp />,
     '/login': () => <LogIn />,
@@ -32,17 +34,11 @@ const App = () => {
             <Box>
                 <h1>Mini Forum</h1>
 
-                {/* <Post id={postId}/> */}
-
                 <Menu>
                     <A href="/">Home</A>
                     <A href="/me">Me</A>
-                    {/* <A href=""></A> */}
-                    {/* <A href=""></A> */}
-
                     <A href="signup">Sign Up</A>
                     <A href="login">Log In</A>
-
                 </Menu>
             </Box>
             {routeResult || <NoMatch />}

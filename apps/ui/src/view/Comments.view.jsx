@@ -9,7 +9,6 @@ const Comment = (post) => {
   const { data, isLoading } = useSelector(state => state.posts);
   console.log(data);
 
-
   if (isLoading) return <h1>Loading data...</h1>;
 
   return (
@@ -17,9 +16,11 @@ const Comment = (post) => {
       <Message>Comments</Message>
       <Box>
         {data.map((p) => (
-          (p.comments)
+          <p>{(p.comments)}</p>
+
         ))}
       </Box>
+      {/* <p>{post}</p> */}
     </>
 
   );

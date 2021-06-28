@@ -5,7 +5,7 @@ import Post from "./Post.view"
 // import {register} from '../api/auth.api';
 import { useSelector } from "react-redux";
 
-import  {fpost} from "../api/posts.api" // fake
+import { fpost } from "../api/posts.api" // fake
 
 
 
@@ -16,13 +16,18 @@ const Home = () => {
 
   return (
     <Box>
-        {data.map((post) => (
-          <Post key={post.id} {...post} />
-        ))}
+      {data.map((post) => (
+        <Post key={post.id} {...post} />
+      ))}
 
-      <Post {...fpost[0]} />
+      {/* fake post */}
+      {/* <Post {...fpost[0]} /> */}
     </Box>
   );
+
+  const foo = (id) => {
+    alert('clicked id: ', id);
+  }
 };
 export default Home;
 
@@ -31,6 +36,5 @@ const Box = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-
   `;
 
