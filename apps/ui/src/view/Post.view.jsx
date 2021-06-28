@@ -19,7 +19,9 @@ const Post = (post) => {
 
       <PostData>
         <Button>Likes: {post.likes}</Button>
-        <Button>Comments: {post.comments?.length}</Button>
+        <Button>
+          <A href="comments">Comments: {post.comments?.length}</A>
+        </Button>
       </PostData>
 
       <Comment>
@@ -32,6 +34,16 @@ const Post = (post) => {
 };
 export default Post;
 
+
+const A = styled.a`
+    text-decoration: none;
+    /* background: linear-gradient(to bottom, midnightblue 0%, thistle 100%); */
+    /* padding: 1rem; */
+    /* color: white; */
+    /* font-family: cursive; */
+    font-size: 1rem;
+    /* border-radius: 1rem; */
+`;
 
 const Box = styled.div`
       width: 65%;

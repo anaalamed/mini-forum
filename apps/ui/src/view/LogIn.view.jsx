@@ -44,7 +44,8 @@ const Form = styled.form`
   border-radius: 1rem;
   border: 3px solid midnightblue;
   &:hover {
-        filter: brightness(90%);
+        /* filter: brightness(90%); */
+        background: #FFFFFF;
         transition: 0.1s;
     }
 `;
@@ -62,7 +63,7 @@ const Message = styled.div`
   text-shadow: 2px 2px 10px;
   font-family: cursive;
   &:hover {
-    background: #FFFFFF;
+    /* background: #FFFFFF; */
     transition: 0.1s;
   }
 `;

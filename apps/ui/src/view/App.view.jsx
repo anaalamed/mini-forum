@@ -5,6 +5,8 @@ import Comment from "./Comments.view";
 import SignUp from "./SignUp.view";
 import LogIn from "./LogIn.view";
 import NoMatch from "./NoMatch.view";
+import Profile from "./Profile.view";
+
 import { colors } from "../styles/colors";
 import { useRoutes } from 'hookrouter';
 
@@ -15,8 +17,10 @@ const routes = {
     '/': () => <Home />,
     '/post/:postId': (postId) => <Post id={postId} />,
     '/post/:postId/comments': () => <Comment />,
+    '/comments': () => <Comment />,
     '/signup': () => <SignUp />,
-    '/login': () => <LogIn />
+    '/login': () => <LogIn />,
+    '/me': () => <Profile />
 };
 
 
@@ -32,11 +36,11 @@ const App = () => {
 
                 <Menu>
                     <A href="/">Home</A>
-                    <A href="/api/me">Me</A>
+                    <A href="/me">Me</A>
                     {/* <A href=""></A> */}
                     {/* <A href=""></A> */}
 
-                    <A href="signup">SignUp</A>
+                    <A href="signup">Sign Up</A>
                     <A href="login">Log In</A>
 
                 </Menu>
@@ -55,18 +59,20 @@ const Box = styled.div`
 `;
 
 const A = styled.a`
-    color: black;
-    background: white;
-    padding: 0.5rem;
-    margin: 1rem;
     text-decoration: none;
-    border-radius: 10%;
+    background: linear-gradient(to bottom, midnightblue 0%, thistle 100%);
+    padding: 1rem;
+    color: white;
+    font-family: cursive;
+    font-size: 1rem;
+    border-radius: 1rem;
 `;
 
 const Menu = styled.div`
     display: flex;
     background: #0c0c27;
     justify-content: space-between;
+    padding: 1rem;
 `
 
 
