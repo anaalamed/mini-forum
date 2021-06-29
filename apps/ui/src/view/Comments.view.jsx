@@ -3,33 +3,33 @@ import styled from "styled-components";
 import { useSelector, useDispatch } from "react-redux"
 // import { comment } from "../state/posts.slice"
 
-const Comment = (post) => {
+const Comments = ({ id }) => {
   // const dispatch = useDispatch();
   //onClick={() => dispatch(comment())}
   const { data, isLoading } = useSelector(state => state.posts);
-  console.log(data);
+  const post = data.find(post => post._id === id);
+  console.log(post);
 
   if (isLoading) return <h1>Loading data...</h1>;
 
   return (
     <>
       <Message>Comments</Message>
-      <Box>
-        {data.map((p) => (
-          <p>{(p.comments)}</p>
-
-        ))}
-      </Box>
+      {post.comments.map((p) => (
+        <Box>{(p)}</Box>
+      ))}
+      {/* </Box> */}
       {/* <p>{post}</p> */}
     </>
 
   );
 };
-export default Comment;
+export default Comments;
 
 
 const Box = styled.div`
       width: 65%;
+      padding: 1rem;
       background: #ebebf9;
       display: flex;
       flex-direction: column;

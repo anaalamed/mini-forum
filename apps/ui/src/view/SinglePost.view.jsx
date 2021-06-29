@@ -8,13 +8,12 @@ import { useParams } from "react-router-dom";
 const SinglePost = ({ id }) => {
   // const dispatch = useDispatch();
   const { data, isLoading } = useSelector(state => state.posts);
-  // let params = useParams();
-  // console.log(id);
-  // console.log(params);
-
   const post = data.find(post => post._id === id);
-  // console.log(post);
   //onClick={() => dispatch(comment())}
+
+  const link = () => {
+    window.location = id + '/comments';
+  }
 
   if (isLoading) return <h1>Loading data...</h1>;
 
@@ -32,7 +31,7 @@ const SinglePost = ({ id }) => {
         <PostData>
           <Button>Likes: {post.likes}</Button>
           <Button>
-            <A href="/comments">Comments: {post.comments?.length}</A>
+            <A href="#" onClick={link}>Comments: {post.comments?.length}</A>
 
           </Button>
         </PostData>

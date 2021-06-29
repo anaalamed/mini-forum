@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import Home from "./Home.view";
-import Comment from "./Comments.view";
+import Comments from "./Comments.view";
 import SignUp from "./SignUp.view";
 import LogIn from "./LogIn.view";
 import NoMatch from "./NoMatch.view";
@@ -18,8 +18,8 @@ import SinglePost from "./SinglePost.view";
 const routes = {
     '/': () => <Home />,
     '/post/:postId': ({ postId }) => <SinglePost id={postId} />,
-    '/post/:postId/comments': (postId) => <Comment id={postId} />,
-    '/comments': () => <Comment />,
+    '/post/:postId/comments': ({ postId }) => <Comments id={postId} />,
+    // '/comments': () => <Comments />,
     '/signup': () => <SignUp />,
     '/login': () => <LogIn />,
     '/me': () => <Profile />

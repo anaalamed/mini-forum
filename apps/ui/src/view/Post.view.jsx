@@ -10,7 +10,6 @@ const Post = (post) => {
   //onClick={() => dispatch(comment())}
 
   const link = () => {
-    console.log('bom');
     window.location = 'post/' + post._id;
   }
 
@@ -30,9 +29,7 @@ const Post = (post) => {
 
       <PostData>
         <Button>Likes: {post.likes}</Button>
-        <Button>
-          <A href="comments">Comments: {post.comments?.length}</A>
-        </Button>
+        <Button>Comments: {post.comments?.length}</Button>
         <ButtonView><A href="#" onClick={link}>view</A></ButtonView>
       </PostData>
 
