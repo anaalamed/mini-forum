@@ -1,26 +1,28 @@
 import React from "react";
 import styled from "styled-components";
 import { useSelector, useDispatch } from "react-redux";
+import { useParams } from "react-router-dom";
 // import { comment } from "../state/posts.slice"
 
 
-const SinglePost = (id) => {
+const SinglePost = ({ id }) => {
   // const dispatch = useDispatch();
   const { data, isLoading } = useSelector(state => state.posts);
-  console.log(id.id.postId);
-  const post = data.find(post => post._id === id.id.postId);
-  console.log(post);
+  // let params = useParams();
+  // console.log(id);
+  // console.log(params);
+
+  const post = data.find(post => post._id === id);
+  // console.log(post);
   //onClick={() => dispatch(comment())}
 
   if (isLoading) return <h1>Loading data...</h1>;
 
   return (
     <Box>
-
-
       <Post>
         <Content>{post.content}</Content>
-        <p>{post._id}</p>
+        {/* <p>{post._id}</p> */}
 
         <Data>
           <Author>{post.author}</Author>
@@ -110,7 +112,8 @@ padding: 10px;
 `
 
 const Comment = styled.p`
-width: 50%;
+/* width: 50%; */
+width: auto;
   padding: 10px;
   margin: 3px;
   background: #9d9de1;

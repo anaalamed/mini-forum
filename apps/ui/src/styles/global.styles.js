@@ -23,7 +23,7 @@ const GlobalStyles = createGlobalStyle`
   }
 
   input { 
-    width: 80%;
+    width: 50%;
     margin-right: 1rem;
     padding: 0.6rem;
     // border-radius: 1rem;

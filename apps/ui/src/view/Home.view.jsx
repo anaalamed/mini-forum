@@ -17,7 +17,7 @@ const Home = () => {
   return (
     <Box>
       {data.map((post) => (
-        <Post key={post.id} {...post} />
+        <Post key={post._id} {...post} />
       ))}
 
       {/* fake post */}

@@ -17,7 +17,7 @@ import SinglePost from "./SinglePost.view";
 
 const routes = {
     '/': () => <Home />,
-    '/post/:postId': (postId) => <SinglePost id={postId} />,
+    '/post/:postId': ({ postId }) => <SinglePost id={postId} />,
     '/post/:postId/comments': (postId) => <Comment id={postId} />,
     '/comments': () => <Comment />,
     '/signup': () => <SignUp />,

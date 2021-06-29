@@ -9,12 +9,19 @@ const Post = (post) => {
   const { data, isLoading } = useSelector(state => state.posts);
   //onClick={() => dispatch(comment())}
 
+  const link = () => {
+    console.log('bom');
+    window.location = 'post/' + post._id;
+  }
+
   if (isLoading) return <h1>Loading data...</h1>;
 
   return (
     <Box>
-      <Content>{post.content}</Content>
-      <p>id: {post._id}</p>
+      <Data>
+        <Content>{post.content}</Content>
+      </Data>
+      {/* <p>id: {post._id}</p> */}
 
       <Data>
         <Author>{post.author}</Author>
@@ -26,12 +33,13 @@ const Post = (post) => {
         <Button>
           <A href="comments">Comments: {post.comments?.length}</A>
         </Button>
+        <ButtonView><A href="#" onClick={link}>view</A></ButtonView>
       </PostData>
 
-      <Comment>
+      {/* <Comment>
         <input type="text" placeholder="Your comment..." />
         <ComButton>Comment</ComButton>
-      </Comment>
+      </Comment> */}
     </Box>
 
   );
@@ -55,7 +63,7 @@ const Box = styled.div`
       display: flex;
       flex-direction: column;
       justify-content: center;
-      // align-items: center;
+      /* align-items: center; */
       border: 2px solid blue;
       border-radius:10px;
       &:hover {
@@ -63,6 +71,16 @@ const Box = styled.div`
         transition: 0.1s;
       }
       margin: 10px;
+  `;
+
+const Button = styled.button`
+  padding: 10px;
+  `
+
+const ButtonView = styled(Button)`
+  width: 3rem;
+  /* align-self: flex-end; */
+  /* margin-left: 10%; */
   `;
 
 const Content = styled.p`
@@ -86,13 +104,10 @@ padding-left: 1rem;
 
 const PostData = styled.div`
 display: flex;
-align-items: stretch;
+align-items: space-between;
 `;
 
 
-const Button = styled.button`
-padding: 10px;
-`
 
 const Comment = styled.p`
 width: 50%;
