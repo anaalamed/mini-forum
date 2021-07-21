@@ -17,14 +17,14 @@ const UserSchema = new Schema({
         type: String,
         required: true
     },
-    role:{
+    role: {
         type: String,
-        default: () => "user",
-        enum: ["user", "admin"]
+        enum: ["user", "admin"],
+        default: () => "user"
     },
-    created:{
+    created: {
         default: Date.now,
-        type: Date   
+        type: Date
     }
 });
 

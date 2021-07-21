@@ -32,7 +32,7 @@ export const updateComment = async (req, res) => {
     try {
         const { content } = req.body;
         const _id = req.params.commentId;
-        const updatedComment = await Comment.updateOne({ _id, user: req.user._id }, { $set: { content } });
+        const updatedComment = await Comment.updateOne({ _id, user: req.user }, { $set: { content } });
         res.json(updatedComment);
     } catch {
         res.status(500).json({ message: "Could not update comment" })
@@ -42,7 +42,7 @@ export const updateComment = async (req, res) => {
 export const deleteComment = async (req, res) => {
     try {
         const _id = req.params.commentId;
-        const deletedComment = await Comment.deleteOne({ _id, user: req.user._id });
+        const deletedComment = await Comment.deleteOne({ _id, user: req.user });
         res.json(deletedComment);
     } catch {
         res.status(500).json({ message: "Could not delete comment" })

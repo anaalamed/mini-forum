@@ -5,11 +5,11 @@ import { verifyUser } from '../middlewares/verify-user'
 const authRouter = Router();
 
 
-authRouter.post('/api/login', login);
-authRouter.post('/api/logout', verifyUser ,logout);
 authRouter.post('/api/register', register);
-authRouter.post('/api/me', verifyUser, updatePersonalInfo);
+authRouter.post('/api/login', login);
 authRouter.get('/api/me', verifyUser, getMe);
+authRouter.post('/api/me', verifyUser, updatePersonalInfo);
 authRouter.post('/api/change-password', verifyUser, changePassword);
+authRouter.post('/api/logout', verifyUser, logout); // doesn't work
 
 export default authRouter;

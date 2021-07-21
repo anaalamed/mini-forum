@@ -1,4 +1,5 @@
 import Post from '../models/post';
+// import { Types } from 'mongoose';
 
 
 export const getPosts = async (req, res) => {
@@ -12,21 +13,20 @@ export const getPosts = async (req, res) => {
 
 export const createPost = async (req, res) => {
     try {
-        const { _id } = req.user;
-        const { title, content } = req.body;
-    
-        const newPost = await Post.create({ title, content, user: _id });
+        const _id = req.user;
+        const { content } = req.body;
+        const newPost = await Post.create({ content, user: _id });
         res.json(newPost);
     } catch {
-        res.status(500).json({ message: "Could not create post" })
+        res.status(500).json({ message: "Could not create post !!" })
     }
 }
 
 export const updatePost = async (req, res) => {
     try {
-        const { title, content } = req.body;
+        const { content } = req.body;
         const _id = req.params.postId;
-        const updatedPost = await Post.updateOne({ _id, user: req.user._id }, { $set: { title, content } });
+        const updatedPost = await Post.updateOne({ _id, user: req.user }, { $set: { content } });
         res.json(updatedPost);
     } catch {
         res.status(500).json({ message: "Could not update post" })
@@ -36,7 +36,7 @@ export const updatePost = async (req, res) => {
 export const deletePost = async (req, res) => {
     try {
         const _id = req.params.postId;
-        const deletedPost = await Post.deleteOne({ _id, user: req.user._id });
+        const deletedPost = await Post.deleteOne({ _id, user: req.user });
         res.json(deletedPost);
     } catch {
         res.status(500).json({ message: "Could not delete post" })

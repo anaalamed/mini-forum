@@ -5,8 +5,6 @@ import countries from '../data/countries';
 // import shortid from "shortid";
 
 
-
-
 const SignUp = () => {
   const { register, handleSubmit, formState: { errors } } = useForm();
 

@@ -1,11 +1,11 @@
 import * as mongoose from 'mongoose';
 
 export function connect(mongoUri = '') {
-	console.log('Connecting to MongoDB ', mongoUri.substring(0, 15));
+	console.log('Connecting to MongoDB ', mongoUri);
 	mongoose.connect(mongoUri, {
 		useNewUrlParser: true,
 		useUnifiedTopology: true,
-		useFindAndModify: false,
+		// useFindAndModify: false,
 		useCreateIndex: true
 	})
 		.then(() => console.log('MONGODB is connected'))

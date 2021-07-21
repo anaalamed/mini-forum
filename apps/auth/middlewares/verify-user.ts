@@ -1,17 +1,13 @@
 import { verifyToken } from '../utils/tokens'
 
 export const verifyUser = async (req, res, next) => {
-        try {
-                const { token } = req.cookies
-                req.user = verifyToken(token);
-                next();
-
-            } catch {
-
-                res.status(401).json({error: "user not authorized"});
-
-            }
-
+    try {
+        const { token } = req.cookies
+        req.user = verifyToken(token);
+        next();
+    } catch {
+        res.status(401).json({ error: "user not authorized" });
+    }
 }
 
 

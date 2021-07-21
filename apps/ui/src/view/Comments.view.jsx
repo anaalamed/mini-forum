@@ -8,7 +8,7 @@ const Comments = ({ id }) => {
   //onClick={() => dispatch(comment())}
   const { data, isLoading } = useSelector(state => state.posts);
   const post = data.find(post => post._id === id);
-  console.log(post);
+  // console.log(post);
 
   if (isLoading) return <h1>Loading data...</h1>;
 
@@ -16,10 +16,8 @@ const Comments = ({ id }) => {
     <>
       <Message>Comments</Message>
       {post.comments.map((p) => (
-        <Box>{(p)}</Box>
+        <Comment>{(p)}</Comment>
       ))}
-      {/* </Box> */}
-      {/* <p>{post}</p> */}
     </>
 
   );
@@ -27,7 +25,7 @@ const Comments = ({ id }) => {
 export default Comments;
 
 
-const Box = styled.div`
+const Comment = styled.div`
       width: 65%;
       padding: 1rem;
       background: #ebebf9;

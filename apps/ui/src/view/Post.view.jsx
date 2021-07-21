@@ -1,11 +1,12 @@
 import React from "react";
 import styled from "styled-components";
 import { useSelector, useDispatch } from "react-redux";
+import { like_added } from "../state/posts.slice"
 // import { comment } from "../state/posts.slice"
 
 
 const Post = (post) => {
-  // const dispatch = useDispatch();
+  const dispatch = useDispatch();
   const { data, isLoading } = useSelector(state => state.posts);
   //onClick={() => dispatch(comment())}
 
@@ -28,7 +29,7 @@ const Post = (post) => {
       </Data>
 
       <PostData>
-        <Button>Likes: {post.likes}</Button>
+        <Button onClick={dispatch(like_added(post.likes))} >Likes: {post.likes} </Button>
         <Button>Comments: {post.comments?.length}</Button>
         <ButtonView><A href="#" onClick={link}>view</A></ButtonView>
       </PostData>

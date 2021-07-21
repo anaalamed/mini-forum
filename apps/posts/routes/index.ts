@@ -5,11 +5,11 @@ const postsRouter = Router();
 
 const verifyUser = (req, res, next) => {
     if (req.headers.user) {
-        req.user = JSON.parse(req.headers.user)
+        req.user = JSON.parse(req.headers.user);
         next();
     }
     else {
-        res.status(401).json({ message: "Not authorized" })
+        res.status(401).json({ message: "Not authorize" })
     }
 }
 
