@@ -12,13 +12,10 @@ import NoMatch from "./NoMatch.view";
 import Profile from "./pages/Profile.view";
 import SinglePost from "./pages/SinglePost.view";
 
-
-
 const routes = {
     '/': () => <Home />,
     '/post/:postId': ({ postId }) => <SinglePost postId={postId} />,
     '/post/:postId/comments': ({ postId }) => <Comments postId={postId} />,
-    // '/comments': () => <Comments />,
     '/signup': () => <SignUp />,
     '/login': () => <LogIn />,
     '/me': () => <Profile />
@@ -33,12 +30,10 @@ const App = () => {
         <Router>
             <Box>
                 <h1>Mini Forum</h1>
-
                 <Menu>
                     <A href="/">Home</A>
                     {(loggedIn === true) ?
                         <A href="/me">Hey, {me.firstName}</A> :
-
                         <div>
                             {/* <A href="/me">Me</A> */}
                             <A href="/me">Hey, guest</A>
@@ -61,14 +56,12 @@ const Box = styled.div`
   align-items: center;
 `;
 
-
 const Menu = styled.div`
     display: flex;
     background: #0c0c27;
     justify-content: space-between;
     align-items: center;
     padding: 1rem;
-
 `
 
 

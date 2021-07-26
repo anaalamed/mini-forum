@@ -1,27 +1,22 @@
 import styled from "styled-components";
-import React, { useState, useEffect } from "react";
-import { useSelector, useDispatch } from "react-redux";
-import { addPostAsync } from '../state/slices/posts.slice';
+import React, { useState } from "react";
+import { useDispatch } from "react-redux";
 import { MdAdd } from 'react-icons/md';
-
+import { addPostAsync } from '../state/slices/posts.slice';
 
 const AddPost = ({ userId, username }) => {
-    const [value, setValue] = useState("");
-
     const dispatch = useDispatch();
+    const [value, setValue] = useState("");
 
     const onSubmitForm = (event) => {
         event.preventDefault();
-        // console.log(username);
         dispatch(addPostAsync({ content: value, user: userId, username }));
         setValue("");
     };
 
-
     return (
         <Main>
             <Form onSubmit={onSubmitForm}>
-                {/* <label>Your Post</label> */}
                 <Input
                     type="text"
                     placeholder="Add your post..."
@@ -34,14 +29,12 @@ const AddPost = ({ userId, username }) => {
     )
 }
 
-export default AddPost
-    ;
+export default AddPost;
 
 const Main = styled.div`
     width: 55%;
     padding: 3rem 0;
     margin: 0 auto;
-    /* border-radius: 1rem; */
 `;
 
 const Form = styled.form`

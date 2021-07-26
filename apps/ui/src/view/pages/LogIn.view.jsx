@@ -2,9 +2,8 @@ import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import styled from "styled-components";
 import { useForm } from 'react-hook-form';
-
-import { login } from '../../state/slices/users.slice';
 import { navigate } from "hookrouter";
+import { login } from '../../state/slices/users.slice';
 import { Title, Button } from '../../styles/global.styles';
 
 
@@ -43,7 +42,6 @@ const LogIn = () => {
       </Form>
 
       {(loggedIn) ? (navigate('/me')) : null}
-
     </Box>
   )
 }

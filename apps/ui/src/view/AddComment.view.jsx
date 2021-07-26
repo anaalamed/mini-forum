@@ -1,26 +1,19 @@
 import styled from "styled-components";
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
-// import { addComment } from '../state/slices/comments.slice';
+import { MdAdd } from 'react-icons/md';
 import { addComment } from '../state/slices/posts.slice';
 
-import { MdAdd } from 'react-icons/md';
-
-
 const AddComment = ({ postId }) => {
-    const [value, setValue] = useState("");
-    const { me, loggedIn } = useSelector(state => state.users);
-
-
     const dispatch = useDispatch();
+    const [value, setValue] = useState("");
+    const { me } = useSelector(state => state.users);
 
     const onSubmitForm = (event) => {
         event.preventDefault();
-        // console.log(username);
         dispatch(addComment({ content: value, user: me._id, entity: postId, username: me.firstName }));
         setValue("");
     };
-
 
     return (
         <Main>

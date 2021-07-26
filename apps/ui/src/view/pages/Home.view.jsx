@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "styled-components";
-import Post from "../Post.view"
 import { useSelector } from "react-redux";
+import Post from "../Post.view"
 import AddPost from '../AddPost.view';
 
 const Home = () => {
@@ -12,7 +12,6 @@ const Home = () => {
 
   return (
     <Box>
-
       {(loggedIn) ? (< AddPost userId={me._id} username={me.firstName} />) : null}
 
       {posts.map((post) => (

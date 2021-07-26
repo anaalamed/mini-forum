@@ -1,12 +1,11 @@
 import React, { useEffect } from "react";
 import styled from "styled-components";
 import { useSelector, useDispatch } from "react-redux";
-import { Row } from '../styles/global.styles';
-import { deletePostAsync, getComments } from '../state/slices/posts.slice';
+import { navigate } from "hookrouter";
 import { AiFillDelete } from 'react-icons/ai';
 import { FiMoreVertical } from 'react-icons/fi';
-import { navigate } from "hookrouter";
-// import { getComments, deleteComment } from "../state/slices/comments.slice"
+import { Row } from '../styles/global.styles';
+import { deletePostAsync, getComments } from '../state/slices/posts.slice';
 
 
 const Post = ({ postData, single }) => {
