@@ -16,12 +16,13 @@ export const getComments = async (req, res) => {
 
 export const createComment = async (req, res) => {
     try {
-        const { _id } = req.user;
-        const { entity, content } = req.body;
+        const _id = req.user;
+        console.log(_id);
+        const { entity, content, username } = req.body;
         if (!entity) {
             return res.status(400).json({ message: "Please provide an entity ID" })
         }
-        const newComment = await Comment.create({ entity, content, user: _id });
+        const newComment = await Comment.create({ entity, content, username, user: _id });
         res.json(newComment);
     } catch {
         res.status(500).json({ message: "Could not create comment" })
@@ -42,7 +43,10 @@ export const updateComment = async (req, res) => {
 export const deleteComment = async (req, res) => {
     try {
         const _id = req.params.commentId;
-        const deletedComment = await Comment.deleteOne({ _id, user: req.user });
+        const user = req.user;
+        console.log(_id);
+        console.log(user);
+        const deletedComment = await Comment.deleteOne({ _id, user });
         res.json(deletedComment);
     } catch {
         res.status(500).json({ message: "Could not delete comment" })

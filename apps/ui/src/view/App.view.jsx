@@ -1,24 +1,23 @@
 import React from "react";
+import { useRoutes, A } from 'hookrouter';
+import { BrowserRouter as Router } from "react-router-dom";
+import { useSelector } from "react-redux";
 import styled from "styled-components";
-import Home from "./Home.view";
+
+import Home from "./pages/Home.view";
 import Comments from "./Comments.view";
-import SignUp from "./SignUp.view";
-import LogIn from "./LogIn.view";
+import SignUp from "./pages/SignUp.view";
+import LogIn from "./pages/LogIn.view";
 import NoMatch from "./NoMatch.view";
-import Profile from "./Profile.view";
+import Profile from "./pages/Profile.view";
+import SinglePost from "./pages/SinglePost.view";
 
-import { colors } from "../styles/colors";
-import { useRoutes } from 'hookrouter';
-
-import { BrowserRouter as Router, Route, Link, Switch } from "react-router-dom";
-import Post from "./Post.view";
-import SinglePost from "./SinglePost.view";
 
 
 const routes = {
     '/': () => <Home />,
-    '/post/:postId': ({ postId }) => <SinglePost id={postId} />,
-    '/post/:postId/comments': ({ postId }) => <Comments id={postId} />,
+    '/post/:postId': ({ postId }) => <SinglePost postId={postId} />,
+    '/post/:postId/comments': ({ postId }) => <Comments postId={postId} />,
     // '/comments': () => <Comments />,
     '/signup': () => <SignUp />,
     '/login': () => <LogIn />,
@@ -28,6 +27,7 @@ const routes = {
 
 const App = () => {
     const routeResult = useRoutes(routes);
+    const { loggedIn, me } = useSelector(state => state.users);
 
     return (
         <Router>
@@ -36,9 +36,16 @@ const App = () => {
 
                 <Menu>
                     <A href="/">Home</A>
-                    <A href="/me">Me</A>
-                    <A href="signup">Sign Up</A>
-                    <A href="login">Log In</A>
+                    {(loggedIn === true) ?
+                        <A href="/me">Hey, {me.firstName}</A> :
+
+                        <div>
+                            {/* <A href="/me">Me</A> */}
+                            <A href="/me">Hey, guest</A>
+                            <A href="/signup">Sign Up</A>
+                            <A href="/login">Log In</A>
+                        </div>
+                    }
                 </Menu>
             </Box>
             {routeResult || <NoMatch />}
@@ -54,21 +61,14 @@ const Box = styled.div`
   align-items: center;
 `;
 
-const A = styled.a`
-    text-decoration: none;
-    background: linear-gradient(to bottom, midnightblue 0%, thistle 100%);
-    padding: 1rem;
-    color: white;
-    font-family: cursive;
-    font-size: 1rem;
-    border-radius: 1rem;
-`;
 
 const Menu = styled.div`
     display: flex;
     background: #0c0c27;
     justify-content: space-between;
+    align-items: center;
     padding: 1rem;
+
 `
 
 

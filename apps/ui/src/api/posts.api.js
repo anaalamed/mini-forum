@@ -5,15 +5,3 @@ export const getPosts = async () => {
 };
 
 
-// --------------------- fake post ----------------
-const DateNow = Date.now(); 
-
-export const fpost = [
-    {
-        content:'** The fake post ** I want sea and a vacation!',
-        author: 'Ana Levit',
-        likes: '3',
-        comments: ["ananakdcndcj", "njcndscj"],
-        timeOfUpload: new Date(DateNow).toString().substr(4, 17)
-    }
-]

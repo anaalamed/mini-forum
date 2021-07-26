@@ -14,8 +14,8 @@ export const getPosts = async (req, res) => {
 export const createPost = async (req, res) => {
     try {
         const _id = req.user;
-        const { content } = req.body;
-        const newPost = await Post.create({ content, user: _id });
+        const { content, username } = req.body;
+        const newPost = await Post.create({ content, user: _id, username });
         res.json(newPost);
     } catch {
         res.status(500).json({ message: "Could not create post !!" })
@@ -36,8 +36,8 @@ export const updatePost = async (req, res) => {
 export const deletePost = async (req, res) => {
     try {
         const _id = req.params.postId;
-        const deletedPost = await Post.deleteOne({ _id, user: req.user });
-        res.json(deletedPost);
+        const post = await Post.deleteOne({ _id, user: req.user });
+        res.json({ message: "post removed successfully" });
     } catch {
         res.status(500).json({ message: "Could not delete post" })
     }

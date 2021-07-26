@@ -9,11 +9,9 @@
   ],
   "scripts": {
     "dev": "concurrently \"npm run dev:*\"",
-    "dev:comments": "npm run dev --workspace=apps/comments",
     "dev:auth": "npm run dev --workspace=apps/auth",
     "dev:posts": "npm run dev --workspace=apps/posts",
     "dev:gateway": "npm run dev --workspace=apps/gateway",
-    "dev:ui": "npm run dev --workspace=apps/ui",
     "db": "docker-compose --file ./mongo-compose.yaml up",
     "start": "node start.js",
     "start:comments": "cd apps/comments && npm start",

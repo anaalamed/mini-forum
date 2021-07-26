@@ -1,15 +1,14 @@
 import React from "react";
 import styled from "styled-components";
 import { useForm } from 'react-hook-form';
-import countries from '../data/countries';
-// import shortid from "shortid";
-
+import countries from '../../data/countries';
+import { Title, Button } from '../../styles/global.styles';
 
 const SignUp = () => {
   const { register, handleSubmit, formState: { errors } } = useForm();
 
   const email_regex = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-  const strongRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*])(?=.{8,})&/;
+  const strongRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.{8,})&/;
   // const match = () => {
   //   if (password !== cpassword) {
   //     return false;
@@ -70,7 +69,7 @@ const SignUp = () => {
 
   return (
     <Box>
-      <Message>Sign Up</Message>
+      <Title>Sign Up</Title>
       <br></br>
       <>
         <Form
@@ -188,22 +187,7 @@ const Box = styled.div`
 
 `;
 
-const Message = styled.div`
-  background: #EDFFEF;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items:center;
-  border: 2px solid midnightblue;
-  font-size: 3rem;
-  color: midnightblue;
-  text-shadow: 2px 2px 10px;
-  font-family: cursive;
-  &:hover {
-    /* background: #FFFFFF; */
-    transition: 0.1s;
-  }
-`;
+
 
 const Form = styled.form`
   width: 65%;
@@ -252,18 +236,18 @@ const Textarea = styled.textarea`
   font-family: Arial;
 `;
 
-const Button = styled.button`
-  background: linear-gradient(to bottom, midnightblue 0%, thistle 100%);
-  padding: 1rem;
-  color: white;
-  font-family: cursive;
-  font-size: 2rem;
-  border-radius: 1rem;
-  margin: 0;
-  position: relative;
-  left: 50%;
-  transform: translate(-50%, 15%);
-`;
+// const Button = styled.button`
+//   background: linear-gradient(to bottom, midnightblue 0%, thistle 100%);
+//   padding: 1rem;
+//   color: white;
+//   font-family: cursive;
+//   font-size: 2rem;
+//   border-radius: 1rem;
+//   margin: 0;
+//   position: relative;
+//   left: 50%;
+//   transform: translate(-50%, 15%);
+// `;
 
 const Error = styled.div`
   color: red;

@@ -9,10 +9,10 @@ import { Provider } from "react-redux";
 import App from "./view/App.view";
 import store from "./state/configure.store.js";
 
-import {fetchPosts} from "./state/posts.slice";
+import {getPosts} from "./state/slices/posts.slice";
 
 // Optionally - fetch initial data from an api
-store.dispatch(fetchPosts());
+store.dispatch(getPosts());
 
 ReactDOM.render(
   <>

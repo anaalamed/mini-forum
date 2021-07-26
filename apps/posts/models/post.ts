@@ -1,10 +1,6 @@
 import { model, Schema } from 'mongoose';
 
 const PostSchema = new Schema({
-    // title: {
-    //     type: String,
-    //     required: true
-    // },
     content: {
         type: String,
         required: true
@@ -12,6 +8,9 @@ const PostSchema = new Schema({
     user: {
         type: Schema.Types.ObjectId,
         required: true,
+    },
+    username: {
+        type: String
     },
     created: {
         type: Date,

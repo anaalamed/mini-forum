@@ -5,7 +5,8 @@ const postsRouter = Router();
 
 const verifyUser = (req, res, next) => {
     if (req.headers.user) {
-        req.user = JSON.parse(req.headers.user);
+        const user = JSON.stringify(req.headers.user);
+        req.user = JSON.parse(user);
         next();
     }
     else {
@@ -18,5 +19,7 @@ postsRouter.get('/api/posts', getPosts);
 postsRouter.post('/api/posts', verifyUser, createPost);
 postsRouter.put('/api/posts/:postId', verifyUser, updatePost);
 postsRouter.delete('/api/posts/:postId', verifyUser, deletePost);
+// postsRouter.delete('/api/posts/:postId', deletePost);
+
 
 export default postsRouter;

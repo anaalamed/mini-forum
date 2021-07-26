@@ -1,23 +1,49 @@
-import React from "react";
+import React, { useEffect } from "react";
 import styled from "styled-components";
 import { useSelector, useDispatch } from "react-redux"
-// import { comment } from "../state/posts.slice"
+import { deleteComment } from "../state/slices/posts.slice"
+import { Title, Button, Row } from '../styles/global.styles';
+import AddComment from './AddComment.view';
+import { AiFillDelete } from 'react-icons/ai';
 
-const Comments = ({ id }) => {
-  // const dispatch = useDispatch();
-  //onClick={() => dispatch(comment())}
-  const { data, isLoading } = useSelector(state => state.posts);
-  const post = data.find(post => post._id === id);
-  // console.log(post);
 
-  if (isLoading) return <h1>Loading data...</h1>;
+
+const Comments = ({ postId }) => {
+  const dispatch = useDispatch();
+  // const { comments, isLoading } = useSelector(state => state.comments);
+  const { comments } = useSelector(state => state.posts.posts.find(post => post._id === postId));
+  console.log(comments);
+
+  const { me, loggedIn } = useSelector(state => state.users);
+
+  // useEffect(() => {
+  //   dispatch(getComments(postId));
+  // }, [postId]);
+
+  // if (isLoading) return <h1>Loading data...</h1>;
 
   return (
     <>
-      <Message>Comments</Message>
-      {post.comments.map((p) => (
-        <Comment>{(p)}</Comment>
+      {/* <Title>Comments</Title> */}
+      {(loggedIn) ? (<AddComment postId={postId} />) : null}
+
+      {(comments?.map(comment =>
+        <Comment>
+          <Row>
+            <h3>{comment.content}</h3>
+
+            {(comment.user === me._id) ?
+              (<p onClick={() => dispatch(deleteComment({ id: comment._id, user: me._id, postId }))}><AiFillDelete /></p>) : null
+            }
+          </Row>
+          <Row>
+            <p>{comment.username}</p>
+            <p>{comment.created.substring(0, 10)} {comment.created.substring(11, 16)}</p>
+          </Row>
+
+        </Comment>
       ))}
+
     </>
 
   );
@@ -26,12 +52,12 @@ export default Comments;
 
 
 const Comment = styled.div`
-      width: 65%;
+      width: 55%;
       padding: 1rem;
       background: #ebebf9;
       display: flex;
       flex-direction: column;
-      justify-content: center;
+      /* justify-content: center; */
       // align-items: center;
       border: 2px solid blue;
       border-radius:10px;
@@ -40,22 +66,12 @@ const Comment = styled.div`
         transition: 0.1s;
       }
       margin: 10px;
-      margin-left: 17.5%;
+      /* margin-left: 17.5%; */
   `;
 
-const Message = styled.div`
-  background: #EDFFEF;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items:center;
-  border: 2px solid midnightblue;
-  font-size: 3rem;
-  color: midnightblue;
-  text-shadow: 2px 2px 10px;
-  font-family: cursive;
-  &:hover {
-    /* background: #FFFFFF; */
-    transition: 0.1s;
-  }
-`;
+// const Row = styled.div`
+//     display: flex;
+//     justify-content: space-between;
+//     align-items: center;
+//   `;
+

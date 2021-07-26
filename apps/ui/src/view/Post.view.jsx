@@ -1,59 +1,62 @@
-import React from "react";
+import React, { useEffect } from "react";
 import styled from "styled-components";
 import { useSelector, useDispatch } from "react-redux";
-import { like_added } from "../state/posts.slice"
-// import { comment } from "../state/posts.slice"
+import { Row } from '../styles/global.styles';
+import { deletePostAsync, getComments } from '../state/slices/posts.slice';
+import { AiFillDelete } from 'react-icons/ai';
+import { FiMoreVertical } from 'react-icons/fi';
+import { navigate } from "hookrouter";
+// import { getComments, deleteComment } from "../state/slices/comments.slice"
 
 
-const Post = (post) => {
+const Post = ({ postData, single }) => {
+  const post = postData;
   const dispatch = useDispatch();
-  const { data, isLoading } = useSelector(state => state.posts);
-  //onClick={() => dispatch(comment())}
+  const { isLoading } = useSelector(state => state.posts);
+  const { comments } = useSelector(state => state.posts.posts.find(item => item._id === post._id));
+  const { me } = useSelector(state => state.users);
+  const link = 'post/' + post._id;
 
-  const link = () => {
-    window.location = 'post/' + post._id;
-  }
+  useEffect(() => {
+    dispatch(getComments(post._id));
+  }, []);
 
   if (isLoading) return <h1>Loading data...</h1>;
-
   return (
     <Box>
-      <Data>
+      <Row>
         <Content>{post.content}</Content>
-      </Data>
-      {/* <p>id: {post._id}</p> */}
+        <span>
+          {(me._id === post.user) ?
+            <Button onClick={() => dispatch(deletePostAsync({ _id: post._id, user: me._id }))}><AiFillDelete /></Button> :
+            null
+          }
 
-      <Data>
-        <Author>{post.author}</Author>
-        <span>{String(post.created).substr(0, 10) + '\xa0\xa0\xa0\xa0' + String(post.created).substr(11, 5)}</span>
-      </Data>
+          {(single !== true) ?
+            (<Button onClick={() => navigate(`${link}`)}><FiMoreVertical /></Button>) :
+            null}
+        </span>
+      </Row>
 
-      <PostData>
-        <Button onClick={dispatch(like_added(post.likes))} >Likes: {post.likes} </Button>
-        <Button>Comments: {post.comments?.length}</Button>
-        <ButtonView><A href="#" onClick={link}>view</A></ButtonView>
-      </PostData>
+      <Row>
+        <Author>{post.username}</Author>
+        <p>{post.created.substring(0, 10)} {post.created.substring(11, 16)}</p>
+      </Row>
 
-      {/* <Comment>
-        <input type="text" placeholder="Your comment..." />
-        <ComButton>Comment</ComButton>
-      </Comment> */}
+      <Row>
+        <div>
+          <p>Comments: {comments?.length}</p>
+          <p>Likes:</p>
+        </div>
+      </Row>
+
+      {/* <Button>Comments: {post.comments?.length}</Button> */}
     </Box>
 
   );
 };
 export default Post;
 
-
-const A = styled.a`
-    text-decoration: none;
-    /* background: linear-gradient(to bottom, midnightblue 0%, thistle 100%); */
-    /* padding: 1rem; */
-    /* color: white; */
-    /* font-family: cursive; */
-    font-size: 1rem;
-    /* border-radius: 1rem; */
-`;
 
 const Box = styled.div`
       width: 65%;
@@ -72,14 +75,12 @@ const Box = styled.div`
   `;
 
 const Button = styled.button`
-  padding: 10px;
+  background-color: #0c0c27;
+  color: white;
+  border-radius: 0.5rem;  
+  padding: 0.5rem;
   `
 
-const ButtonView = styled(Button)`
-  width: 3rem;
-  /* align-self: flex-end; */
-  /* margin-left: 10%; */
-  `;
 
 const Content = styled.p`
   font-size: 2rem;
@@ -90,42 +91,11 @@ const Content = styled.p`
    margin: 0;
   `;
 
-const Data = styled.div`
-  display: flex;
-  justify-content: space-between;
-  `;
-
 const Author = styled.div`
 font-size: 1rem;
 padding-left: 1rem;
 `;
 
-const PostData = styled.div`
-display: flex;
-align-items: space-between;
-`;
 
 
-
-const Comment = styled.p`
-width: 50%;
-  padding: 10px;
-  margin: 3px;
-  background: #9d9de1;
-  border: 1px solid #242475;
-  &:hover {
-    background: #FFFFFF;
-    transition: 0.1s;
-  }
-  border-radius: 10px;
-  font-family: "Yanone Kaffeesatz";
-`;
-
-const ComButton = styled.button`
-padding: 10px;
-margin: 0;
-border: 1px solid #242475;
-background: #242475;
-color: white;
-`
 

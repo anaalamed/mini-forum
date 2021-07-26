@@ -16,9 +16,10 @@ export const login = async (req, res) => {
         });
         res.cookie("token", token, { maxAge: THIRTY_DAYS })
         res.json({
-            _id: userFound._id,
-            name: userFound.firstName,
-            role: userFound.role
+            // _id: userFound._id,
+            // name: userFound.firstName,
+            // role: userFound.role
+            userFound
         });
     } catch {
         res.status(500).json({ message: "Could not login" })

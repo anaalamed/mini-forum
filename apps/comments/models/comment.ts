@@ -14,6 +14,9 @@ const CommentSchema = new Schema({
         type: Schema.Types.ObjectId,
         required: true,
     },
+    username: {
+        type: String,
+    },
     created: {
         type: Date,
         default: Date.now
