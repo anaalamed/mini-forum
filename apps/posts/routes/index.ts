@@ -1,5 +1,5 @@
 import { Router } from 'express';
-import { getPosts, createPost, updatePost, deletePost } from "../controllers/posts"
+import { getPosts, createPost, updatePost, deletePost, addLike } from "../controllers/posts"
 
 const postsRouter = Router();
 
@@ -19,7 +19,9 @@ postsRouter.get('/api/posts', getPosts);
 postsRouter.post('/api/posts', verifyUser, createPost);
 postsRouter.put('/api/posts/:postId', verifyUser, updatePost);
 postsRouter.delete('/api/posts/:postId', verifyUser, deletePost);
-// postsRouter.delete('/api/posts/:postId', deletePost);
+
+postsRouter.post('/api/posts/:postId', verifyUser, addLike);
+
 
 
 export default postsRouter;

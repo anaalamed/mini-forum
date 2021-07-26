@@ -1,6 +1,4 @@
 import Post from '../models/post';
-// import { Types } from 'mongoose';
-
 
 export const getPosts = async (req, res) => {
     try {
@@ -40,6 +38,18 @@ export const deletePost = async (req, res) => {
         res.json({ message: "post removed successfully" });
     } catch {
         res.status(500).json({ message: "Could not delete post" })
+    }
+}
+
+export const addLike = async (req, res) => {
+    try {
+        const _id = req.params.postId;
+        const { likes } = req.body;
+
+        const post = await Post.updateOne({ _id, user: req.user }, { $set: { likes: (likes + 1) } });
+        res.json(post);
+    } catch {
+        res.status(500).json({ message: "Could not add like" })
     }
 }
 

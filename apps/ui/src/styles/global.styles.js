@@ -43,6 +43,10 @@ const GlobalStyles = createGlobalStyle`
     padding: 1rem;
   }
 
+  span {
+    padding: 1rem;
+  }
+
 `;
 
 export default GlobalStyles;

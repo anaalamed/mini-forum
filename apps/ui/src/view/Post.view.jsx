@@ -2,23 +2,28 @@ import React, { useEffect } from "react";
 import styled from "styled-components";
 import { useSelector, useDispatch } from "react-redux";
 import { navigate } from "hookrouter";
-import { AiFillDelete } from 'react-icons/ai';
+import { AiFillDelete, AiFillLike, AiOutlineComment } from 'react-icons/ai';
 import { FiMoreVertical } from 'react-icons/fi';
 import { Row } from '../styles/global.styles';
-import { deletePostAsync, getComments } from '../state/slices/posts.slice';
+import { deletePostAsync, getComments, addLike } from '../state/slices/posts.slice';
 
 
 const Post = ({ postData, single }) => {
   const post = postData;
   const dispatch = useDispatch();
   const { isLoading } = useSelector(state => state.posts);
-  const { comments } = useSelector(state => state.posts.posts.find(item => item._id === post._id));
+  const { comments, likes } = useSelector(state => state.posts.posts.find(item => item._id === post._id));
   const { me } = useSelector(state => state.users);
   const link = 'post/' + post._id;
 
   useEffect(() => {
     dispatch(getComments(post._id));
   }, []);
+
+  const handleLike = () => {
+    console.log('VOOO');
+    dispatch(addLike({ id: post._id, likes: post.likes, user: me._id }));
+  }
 
   if (isLoading) return <h1>Loading data...</h1>;
   return (
@@ -42,14 +47,12 @@ const Post = ({ postData, single }) => {
         <p>{post.created.substring(0, 10)} {post.created.substring(11, 16)}</p>
       </Row>
 
-      <Row>
-        <div>
-          <p>Comments: {comments?.length}</p>
-          <p>Likes:</p>
-        </div>
-      </Row>
+          <div>
+            <span onClick={handleLike}><AiFillLike /> {likes}</span>
+            <AiOutlineComment /> {comments?.length}
+          </div>
 
-      {/* <Button>Comments: {post.comments?.length}</Button> */}
+          <br></br>
     </Box>
 
   );
