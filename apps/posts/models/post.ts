@@ -1,6 +1,6 @@
-import { model, Schema } from 'mongoose';
+import { model, Schema, Document } from 'mongoose';
 
-const PostSchema = new Schema({
+const PostSchema = new Schema<Post>({
     content: {
         type: String,
         required: true
@@ -13,8 +13,8 @@ const PostSchema = new Schema({
         type: String
     },
     likes: {
-        type: Number,
-        default: 0
+        type: Array,
+        default: []
     },
     comments: {
         type: Array,
@@ -26,6 +26,10 @@ const PostSchema = new Schema({
     },
 });
 
-const Post = model('Post', PostSchema);
+interface Post extends Document {
+    likes: any
+}
 
-export default Post;
+const PostModel = model<Post>('Post', PostSchema);
+
+export default PostModel;

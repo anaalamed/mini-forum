@@ -5,7 +5,7 @@ import { navigate } from "hookrouter";
 import { AiFillDelete, AiFillLike, AiOutlineComment } from 'react-icons/ai';
 import { FiMoreVertical } from 'react-icons/fi';
 import { Row } from '../styles/global.styles';
-import { deletePostAsync, getComments, addLike, deleteComment } from '../state/slices/posts.slice';
+import { deletePostAsync, toogleLike, deleteComment } from '../state/slices/posts.slice';
 
 
 const Post = ({ postData, single }) => {
@@ -23,8 +23,7 @@ const Post = ({ postData, single }) => {
   }
 
   const handleLike = () => {
-    console.log('VOOO');
-    dispatch(addLike({ id: post._id, likes: post.likes, user: me._id }));
+    dispatch(toogleLike({ id: post._id, likes: post.likes, user: me._id }));
   }
 
   if (isLoading) return <h1>Loading data...</h1>;
@@ -50,7 +49,7 @@ const Post = ({ postData, single }) => {
       </Row>
 
       <div>
-        <span onClick={handleLike}><AiFillLike /> {likes}</span>
+        <span onClick={handleLike}><AiFillLike /> {likes.length}</span>
         <AiOutlineComment /> {comments?.length}
       </div>
 

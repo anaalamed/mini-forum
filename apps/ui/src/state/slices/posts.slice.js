@@ -104,7 +104,7 @@ export const deleteComment = createAsyncThunk(
 );
 
 // ----------------------------- likes ------------------------------------
-export const addLike = createAsyncThunk(
+export const toogleLike = createAsyncThunk(
 'posts/addLikeAsync',
 async (payload) => {
 	console.log(payload);
@@ -114,10 +114,11 @@ async (payload) => {
 			'Content-Type': 'application/json',
 			'user':  (payload.user),
 		},
-		body: JSON.stringify({ likes: payload.likes }),
+		// body: JSON.stringify({ likes: payload.likes }),
 	});
 		if (response.ok) {
-			return { id: payload.id, likes: payload.likes };
+			const likes = await response.json();
+			return { id: payload.id, likes };
 		}
 	}
 );
@@ -152,9 +153,10 @@ const postsSlice = createSlice({
 		const index = state.posts.find(post => post._id === action.payload.postId).comments.findIndex(comment => comment._id === action.payload.id);
 		state.posts.find(post => post._id === action.payload.postId).comments.splice(index,1);
       },
-	  [addLike.fulfilled]: (state, action) => {
+	  [toogleLike.fulfilled]: (state, action) => {
+		console.log(action.payload);
 		const index = state.posts.findIndex(post => post._id === action.payload.id);
-		state.posts[index].likes = action.payload.likes+1;
+		state.posts[index].likes = action.payload.likes;
       },
     }
   });
