@@ -1,8 +1,9 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useRoutes, A } from 'hookrouter';
 import { BrowserRouter as Router } from "react-router-dom";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import styled from "styled-components";
+import { getComments } from '../state/slices/posts.slice'
 
 import Home from "./pages/Home.view";
 import Comments from "./Comments.view";
@@ -23,8 +24,15 @@ const routes = {
 
 
 const App = () => {
+    const dispatch = useDispatch();
     const routeResult = useRoutes(routes);
     const { loggedIn, me } = useSelector(state => state.users);
+    const { posts, isLoading } = useSelector(state => state.posts);
+
+    useEffect(() => {
+        posts.map(post => dispatch(getComments(post._id)));
+    }, []);
+
 
     return (
         <Router>

@@ -1,6 +1,6 @@
 import React from "react";
 import styled from "styled-components";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import Post from "../Post.view"
 import AddPost from '../AddPost.view';
 
@@ -9,7 +9,6 @@ const Home = () => {
   const { loggedIn, me } = useSelector(state => state.users);
 
   if (isLoading) return <h1>Loading posts...</h1>;
-
   return (
     <Box>
       {(loggedIn) ? (< AddPost userId={me._id} username={me.firstName} />) : null}

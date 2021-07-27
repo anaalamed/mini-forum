@@ -117,7 +117,6 @@ async (payload) => {
 		body: JSON.stringify({ likes: payload.likes }),
 	});
 		if (response.ok) {
-			// const post = await response.json();
 			return { id: payload.id, likes: payload.likes };
 		}
 	}
@@ -157,7 +156,6 @@ const postsSlice = createSlice({
 		const index = state.posts.findIndex(post => post._id === action.payload.id);
 		state.posts[index].likes = action.payload.likes+1;
       },
-
     }
   });
 

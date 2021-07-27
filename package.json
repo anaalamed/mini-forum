@@ -18,6 +18,7 @@
     "start:auth": "cd apps/auth && npm start",
     "start:posts": "cd apps/posts && npm start",
     "start:gateway": "cd apps/gateway && npm start",
+    "start:ui": "cd apps/ui && npm start",
     "postinstall": "node postinstall.js"
   },
   "repository": {

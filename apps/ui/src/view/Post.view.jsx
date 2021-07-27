@@ -5,7 +5,7 @@ import { navigate } from "hookrouter";
 import { AiFillDelete, AiFillLike, AiOutlineComment } from 'react-icons/ai';
 import { FiMoreVertical } from 'react-icons/fi';
 import { Row } from '../styles/global.styles';
-import { deletePostAsync, getComments, addLike } from '../state/slices/posts.slice';
+import { deletePostAsync, getComments, addLike, deleteComment } from '../state/slices/posts.slice';
 
 
 const Post = ({ postData, single }) => {
@@ -16,9 +16,11 @@ const Post = ({ postData, single }) => {
   const { me } = useSelector(state => state.users);
   const link = 'post/' + post._id;
 
-  useEffect(() => {
-    dispatch(getComments(post._id));
-  }, []);
+  // delete all comments of the post and then delete the post! 
+  const handleDelete = () => {
+    post.comments.map(comment => dispatch(deleteComment({ id: comment._id, user: me._id, postId: post._id })));
+    dispatch(deletePostAsync({ _id: post._id, user: me._id }));
+  }
 
   const handleLike = () => {
     console.log('VOOO');
@@ -32,7 +34,7 @@ const Post = ({ postData, single }) => {
         <Content>{post.content}</Content>
         <span>
           {(me._id === post.user) ?
-            <Button onClick={() => dispatch(deletePostAsync({ _id: post._id, user: me._id }))}><AiFillDelete /></Button> :
+            <Button onClick={handleDelete}><AiFillDelete /></Button> :
             null
           }
 
@@ -47,12 +49,12 @@ const Post = ({ postData, single }) => {
         <p>{post.created.substring(0, 10)} {post.created.substring(11, 16)}</p>
       </Row>
 
-          <div>
-            <span onClick={handleLike}><AiFillLike /> {likes}</span>
-            <AiOutlineComment /> {comments?.length}
-          </div>
+      <div>
+        <span onClick={handleLike}><AiFillLike /> {likes}</span>
+        <AiOutlineComment /> {comments?.length}
+      </div>
 
-          <br></br>
+      <br></br>
     </Box>
 
   );
