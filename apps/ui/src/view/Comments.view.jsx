@@ -44,8 +44,8 @@ const Comment = styled.div`
       border: 2px solid blue;
       border-radius:10px;
       &:hover {
-        background: #c4c4ed;
-        transition: 0.1s;
+        background: coral;
+        transition: 0.5s;
       }
       margin: 10px;
   `;

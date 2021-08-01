@@ -41,10 +41,21 @@ const GlobalStyles = createGlobalStyle`
     text-transform: uppercase;
     /* font-size: 1.3rem; */
     padding: 1rem;
+    &:hover {
+      color: coral;
+      transition: 1s;
+    }
   }
 
   span {
     padding: 1rem;
+  }
+
+  .icon {
+    &:hover {
+      color: coral;
+      transition: 1s;
+    }
   }
 
 `;

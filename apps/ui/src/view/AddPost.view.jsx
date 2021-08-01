@@ -23,7 +23,7 @@ const AddPost = ({ userId, username }) => {
                     onChange={(event) => setValue(event.target.value)}
                     value={value}>
                 </Input>
-                <Button type="submit" ><h2><MdAdd /></h2></Button>
+                <Button type="submit" ><h2 className="icon"><MdAdd /></h2></Button>
             </Form>
         </Main>
     )
@@ -49,6 +49,10 @@ const Input = styled.input`
     border-bottom-left-radius: 1rem;
     ::placeholder {
         letter-spacing: 0.5rem;
+    }
+    &:hover {
+      background-color: coral;
+      transition: 1s;
     }
 
 `;

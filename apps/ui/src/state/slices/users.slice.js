@@ -35,7 +35,6 @@ export const logout  = createAsyncThunk(
         }
   });
 
-  // finish
   export const registration  = createAsyncThunk(
     'users/registration',
     async (payload) => {
@@ -53,9 +52,25 @@ export const logout  = createAsyncThunk(
         })
       });
         if (response.ok) {
-			    return { message: "registration successfully" };
+        const user = await response.json();
+			    return { user };
         }
   });
+
+  export const getUsers  = createAsyncThunk(
+    'users/getUsers',
+    async (payload) => {
+      console.log(payload);
+      const response = await fetch('http://localhost:4000/api/users', {
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      });
+        if (response.ok) {
+          const users = await response.json();
+          return {users};
+        }
+    });
 
 
 
@@ -69,15 +84,24 @@ const usersSlice = createSlice({
   },
   reducers: {},
   extraReducers: {
+    [registration.fulfilled]: (state, action) => {
+      alert("you registrated successfully");
+      state.users.push(action.payload.user);
+    },
     [login.fulfilled]: (state, action) => {
       state.me = action.payload.user.userFound;
       state.loggedIn = true;
-      state.users.push(action.payload.user.userFound);
     },
     [logout.fulfilled]: (state, action) => {
       state.me = {};
       state.loggedIn = false;
+    },
+    [getUsers.fulfilled]: (state, action) => {
+      console.log(action.payload);
+      state.users=(action.payload.users);
     }
+
+
   }
 });
 

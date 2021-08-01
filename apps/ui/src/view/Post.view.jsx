@@ -7,14 +7,14 @@ import { FiMoreVertical } from 'react-icons/fi';
 import { Row } from '../styles/global.styles';
 import { deletePostAsync, toogleLike, deleteComment } from '../state/slices/posts.slice';
 
-
 const Post = ({ postData, single }) => {
   const post = postData;
   const dispatch = useDispatch();
   const { isLoading } = useSelector(state => state.posts);
   const { comments, likes } = useSelector(state => state.posts.posts.find(item => item._id === post._id));
   const { me, users } = useSelector(state => state.users);
-  const link = 'post/' + post._id;
+
+  var whoLiked = [];
 
   // delete all comments of the post and then delete the post! 
   const handleDelete = () => {
@@ -26,14 +26,18 @@ const Post = ({ postData, single }) => {
     dispatch(toogleLike({ id: post._id, likes: post.likes, user: me._id }));
   }
 
-
+  const handleViewLikes = () => {
+    const likes = findName();
+    alert(likes);
+    whoLiked = likes;
+  }
 
   const findName = () => {
     var names = [];
     likes.forEach(id => {
-      names = users.find(user => user._id === id)?.firstName;
+      names.push(users.find(user => user._id === id)?.firstName);
     });
-    console.log(names);
+    // console.log(names);
     return names;
   };
 
@@ -49,7 +53,7 @@ const Post = ({ postData, single }) => {
           }
 
           {(single !== true) ?
-            (<Button onClick={() => navigate(`${link}`)}><FiMoreVertical /></Button>) :
+            (<Button onClick={() => navigate(`post/${post._id}`)}><FiMoreVertical /></Button>) :
             null}
         </span>
       </Row>
@@ -60,9 +64,15 @@ const Post = ({ postData, single }) => {
       </Row>
 
       <div>
-        <span onClick={handleLike}><AiFillLike /> {likes.length} { }</span>
+        <span onClick={handleLike}
+        // onMouseEnter={handleViewLikes}
+        ><AiFillLike /> {likes.length}</span>
         <AiOutlineComment /> {comments?.length}
       </div>
+
+      {/* <div>
+        {(whoLiked.length !== 0) ? (whoLiked.map(like => (<p>{like}</p>))) : null}
+      </div> */}
 
       <br></br>
     </Box>
@@ -82,8 +92,8 @@ const Box = styled.div`
       border: 2px solid blue;
       border-radius:10px;
       &:hover {
-        background: #c4c4ed;
-        transition: 0.1s;
+        background: coral;
+        transition: 1s;
       }
       margin: 10px;
   `;
@@ -100,7 +110,7 @@ const Content = styled.p`
   font-size: 2rem;
   color: #242475;
   font-weight: bold;
-  padding: 1rem;
+  /* padding: 0.5rem; */
   font-family: "Yanone Kaffeesatz";
    margin: 0;
   `;

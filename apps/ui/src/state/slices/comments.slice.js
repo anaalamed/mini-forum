@@ -1,5 +1,4 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
-// import { getPosts } from '../../api/posts.api';
 
 export const getComments = createAsyncThunk(
 	'comments/getComments',
@@ -74,7 +73,6 @@ const commentsSlice = createSlice({
         state.comments.push(action.payload.comment);
       },
       [deleteComment.fulfilled]: (state, action) => {
-        // console.log(action.payload);
         const index = state.comments.findIndex(item => item._id === action.payload.id);
         state.comments.splice(index,1);
       }

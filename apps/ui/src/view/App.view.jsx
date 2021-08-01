@@ -12,14 +12,17 @@ import LogIn from "./pages/LogIn.view";
 import NoMatch from "./NoMatch.view";
 import Profile from "./pages/Profile.view";
 import SinglePost from "./pages/SinglePost.view";
+import Users from "./pages/Users.view";
 
 const routes = {
     '/': () => <Home />,
-    '/post/:postId': ({ postId }) => <SinglePost postId={postId} />,
-    '/post/:postId/comments': ({ postId }) => <Comments postId={postId} />,
     '/signup': () => <SignUp />,
     '/login': () => <LogIn />,
-    '/me': () => <Profile />
+    '/me': (userId) => <Profile id={userId} />,
+    '/users': () => <Users />,
+    '/post/:postId': ({ postId }) => <SinglePost postId={postId} />,
+    '/post/:postId/comments': ({ postId }) => <Comments postId={postId} />,
+    '/user/:userId': ({ userId }) => <Profile id={userId} />
 };
 
 
@@ -39,7 +42,11 @@ const App = () => {
             <Box>
                 <h1>Mini Forum</h1>
                 <Menu>
-                    <A href="/">Home</A>
+                    <div>
+                        <A href="/">Home</A>
+                        <A href="/users">Users</A>
+                    </div>
+
                     {(loggedIn === true) ?
                         <A href="/me">Hey, {me.firstName}</A> :
                         <div>
@@ -69,7 +76,7 @@ const Menu = styled.div`
     background: #0c0c27;
     justify-content: space-between;
     align-items: center;
-    padding: 1rem;
+    padding: 2rem;
 `
 
 

@@ -13,11 +13,7 @@ const SignUp = () => {
   const email_regex = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
   // const strongRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.{8,})&/;
   const passwordRegex = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{6,}$/;
-  // const match = () => {
-  //   if (password !== cpassword) {
-  //     return false;
-  //   }
-  // }
+
 
   const error_messages = {
     first_name: {
@@ -154,7 +150,7 @@ const SignUp = () => {
           </Error>
           <br></br>
 
-          <label>Confirm Password: </label>
+          {/* <label>Confirm Password: </label>
           <Input
             name="cpassword"
             type='password'
@@ -166,7 +162,7 @@ const SignUp = () => {
             {get_error_msg(errors, error_messages, "cpassword")}
 
           </Error>
-          <br></br>
+          <br></br> */}
 
           <label>Description: </label>
           <Textarea
@@ -203,7 +199,7 @@ const Form = styled.form`
   border: 3px solid midnightblue;
   &:hover {
         /* filter: brightness(90%); */
-        background: #FFFFFF;
+        background: coral;
         transition: 0.1s;
     }
 `;

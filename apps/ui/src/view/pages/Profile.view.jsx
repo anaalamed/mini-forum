@@ -3,43 +3,60 @@ import styled from "styled-components";
 import { useDispatch, useSelector } from "react-redux";
 import { Title, Button } from '../../styles/global.styles';
 import { logout } from '../../state/slices/users.slice'
+import Post from "../Post.view";
 
-const Profile = () => {
-  const { me } = useSelector(state => state.users);
+const Profile = ({ id }) => {
   const dispatch = useDispatch();
+  const { me, users } = useSelector(state => state.users);
+  const { posts } = useSelector(state => state.posts);
+
+  var user;
+  if (id === null) {
+    user = me;
+  }
+  else {
+    user = users.find(user => user._id === id);
+  }
+
+  const userPosts = posts.filter(post => post.user === user._id);
+
   return (
-    <Box>
-      <Title>My Profile</Title>
+    <>
+      <Title>{(user.firstName) || null} Profile</Title>
+      <Box>
 
-      {(Object.keys(me).length === 0) ?
-        (<Button><a href="/login">Log In</a></Button>) :
-        (<Section>
-          <label>Name:</label>
-          <h3>{me.firstName} </h3>
+        {(Object.keys(user).length === 0) ?
+          (<Button><a href="/login">Log In</a></Button>) :
+          (<Section>
 
-          <label>Last Name:</label>
-          <h3>{me.lastName}</h3>
-          {/* <br></br> */}
+            <p>Name: <span className="property">{user.firstName}</span></p>
+            <p>Last Name: <span className="property">{user.lastName}</span></p>
+            <p>Country: <span className="property">{user.country}</span></p>
+            <p>Joined: <span className="property">{user.created.substring(0, 10)}</span></p>
 
-          <label>Email: </label>
-          <h3>{me.email}</h3>
-          {/* <br></br> */}
+            {(me._id === user._id) ?
+              <>
+                <p>Email: <span className="property">{user.email}</span></p>
+                <Button onClick={() => dispatch(logout())}>Log Out</Button>
+              </>
+              : null
+            }
+          </Section>)
+        }
 
-          <label>Role: </label>
-          <h3>{me.role}</h3>
-          {/* <br></br> */}
-
-          {/* <Button>Edit Profile... ? </Button> */}
-          <Button onClick={() => dispatch(logout())}>Log Out</Button>
-        </Section>)
-      }
-    </Box>
+        {(userPosts.map(post => (<Post postData={post} />)))}
+      </Box>
+    </>
   )
 }
 
 export default Profile;
 
 const Box = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 
 `;
 
@@ -47,17 +64,23 @@ const Section = styled.div`
   background-color: #EDFFEF;
   margin-top: 1rem;
   width: 50%;
-  margin-left: 25%;
   display: flex;
   flex-direction: column;
   justify-content: center;
   /* align-items: center; */
   padding: 3rem;
   border-radius: 1rem;
-    h3 {
+  &:hover {
+    background-color: coral;
+    transition: 1s;
+  }
+
+  span {
       color: midnightblue;
       padding: 1rem;
-    }
+      font-weight: bold;
+      font-size: 2rem;
+  }
 `;
 
 

@@ -114,7 +114,6 @@ async (payload) => {
 			'Content-Type': 'application/json',
 			'user':  (payload.user),
 		},
-		// body: JSON.stringify({ likes: payload.likes }),
 	});
 		if (response.ok) {
 			const likes = await response.json();
