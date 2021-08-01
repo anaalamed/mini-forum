@@ -42,6 +42,12 @@ const LogIn = () => {
       </Form>
 
       {(loggedIn) ? (navigate('/me')) : null}
+
+      <Fake>
+        <h3>Fake Account:</h3>
+        <p>email: moshe@gmail.com</p>
+        <p>password: 123456</p>
+      </Fake>
     </Box>
   )
 }
@@ -49,14 +55,18 @@ const LogIn = () => {
 export default LogIn;
 
 const Box = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  /* align-items: center; */
 
 `;
 
 const Form = styled.form`
-  width: 65%;
-  margin-left: 17.5%;
+  width: 50%;
+  margin-left: 25%;
   background: #EDFFEF;
-  padding: 2rem;
+  padding: 2rem 6rem;
   border-radius: 1rem;
   border: 3px solid midnightblue;
   &:hover {
@@ -66,7 +76,6 @@ const Form = styled.form`
     }
 `;
 
-
 const Input = styled.input`
   background: ${({ error_styled }) => (error_styled ? "pink" : "white")};
   width: 100%;
@@ -74,5 +83,17 @@ const Input = styled.input`
   padding: 1rem;
   border-radius: 0.5rem;
   font-family: Arial;
+  margin-bottom: 2rem;
+`;
+
+const Fake = styled.div`
+  margin: 0 auto;
+  margin-top: 4rem;
+  background-color: #2d2da3;
+  /* width: 30%; */
+  padding: 1rem 2rem;
+  border-radius: 1rem;
+  border: 1rem solid coral;
+  color: coral;
 `;
 

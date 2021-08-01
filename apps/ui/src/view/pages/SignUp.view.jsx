@@ -1,14 +1,18 @@
 import React from "react";
 import styled from "styled-components";
 import { useForm } from 'react-hook-form';
+import { useDispatch } from "react-redux";
 import countries from '../../data/countries';
 import { Title, Button } from '../../styles/global.styles';
+import { registration } from '../../state/slices/users.slice'
 
 const SignUp = () => {
   const { register, handleSubmit, formState: { errors } } = useForm();
+  const dispatch = useDispatch();
 
   const email_regex = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-  const strongRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.{8,})&/;
+  // const strongRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.{8,})&/;
+  const passwordRegex = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{6,}$/;
   // const match = () => {
   //   if (password !== cpassword) {
   //     return false;
@@ -65,7 +69,10 @@ const SignUp = () => {
     return generate(field_name);
   };
 
-  const onSubmit = (data) => console.log(data);
+  const onSubmit = (data) => {
+    console.log(data);
+    dispatch(registration(data));
+  }
 
   return (
     <Box>
@@ -139,7 +146,7 @@ const SignUp = () => {
             name="password"
             type='password'
             placeholder="Password"
-            {...register('password', { required: true, minLength: 8, pattern: strongRegex })}
+            {...register('password', { required: true, minLength: 8, pattern: passwordRegex })}
             error_styled={errors.password}
           ></Input>
           <Error show={errors.password}>
@@ -187,13 +194,11 @@ const Box = styled.div`
 
 `;
 
-
-
 const Form = styled.form`
-  width: 65%;
-  margin-left: 17.5%;
+  width: 50%;
+  margin-left: 25%;
   background: #EDFFEF;
-  padding: 2rem;
+  padding: 2rem 6rem;
   border-radius: 1rem;
   border: 3px solid midnightblue;
   &:hover {
@@ -203,12 +208,6 @@ const Form = styled.form`
     }
 `;
 
-const WraperSelect = styled.div`
-  select {
-    background: ${({ error_styled }) => (error_styled ? "pink" : "white")};
-  }
-`;
-
 const Input = styled.input`
   background: ${({ error_styled }) => (error_styled ? "pink" : "white")};
   width: 100%;
@@ -216,7 +215,16 @@ const Input = styled.input`
   padding: 1rem;
   border-radius: 0.5rem;
   font-family: Arial;
+  margin-bottom: 2rem;
 `;
+
+
+const WraperSelect = styled.div`
+  select {
+    background: ${({ error_styled }) => (error_styled ? "pink" : "white")};
+  }
+`;
+
 const Select = styled.select`
   background: ${({ error_styled }) => (error_styled ? "pink" : "white")};
   width: 100%;
@@ -235,19 +243,6 @@ const Textarea = styled.textarea`
   padding: 1rem;
   font-family: Arial;
 `;
-
-// const Button = styled.button`
-//   background: linear-gradient(to bottom, midnightblue 0%, thistle 100%);
-//   padding: 1rem;
-//   color: white;
-//   font-family: cursive;
-//   font-size: 2rem;
-//   border-radius: 1rem;
-//   margin: 0;
-//   position: relative;
-//   left: 50%;
-//   transform: translate(-50%, 15%);
-// `;
 
 const Error = styled.div`
   color: red;

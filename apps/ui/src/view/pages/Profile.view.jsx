@@ -12,7 +12,7 @@ const Profile = () => {
       <Title>My Profile</Title>
 
       {(Object.keys(me).length === 0) ?
-        (<a href="/login">Log In</a>) :
+        (<Button><a href="/login">Log In</a></Button>) :
         (<Section>
           <label>Name:</label>
           <h3>{me.firstName} </h3>
@@ -29,7 +29,7 @@ const Profile = () => {
           <h3>{me.role}</h3>
           {/* <br></br> */}
 
-          <Button>Edit Profile... ? </Button>
+          {/* <Button>Edit Profile... ? </Button> */}
           <Button onClick={() => dispatch(logout())}>Log Out</Button>
         </Section>)
       }
@@ -45,20 +45,19 @@ const Box = styled.div`
 
 const Section = styled.div`
   background-color: #EDFFEF;
-  width: 65%;
-  margin-left: 17.5%;
+  margin-top: 1rem;
+  width: 50%;
+  margin-left: 25%;
   display: flex;
   flex-direction: column;
   justify-content: center;
-  align-content: center;
-  padding: 1rem;
-
+  /* align-items: center; */
+  padding: 3rem;
+  border-radius: 1rem;
     h3 {
       color: midnightblue;
       padding: 1rem;
-
     }
-
 `;
 
 

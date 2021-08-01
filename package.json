@@ -19,7 +19,7 @@
     "start:posts": "cd apps/posts && npm start",
     "start:gateway": "cd apps/gateway && npm start",
     "postinstall": "node postinstall.js",
-    "build": "cd apps/ui/ && npm install && npm run build"
+    "build": "cd apps/ui && npm install && npm run build"
   },
   "repository": {
     "type": "git",

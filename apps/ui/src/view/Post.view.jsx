@@ -13,7 +13,7 @@ const Post = ({ postData, single }) => {
   const dispatch = useDispatch();
   const { isLoading } = useSelector(state => state.posts);
   const { comments, likes } = useSelector(state => state.posts.posts.find(item => item._id === post._id));
-  const { me } = useSelector(state => state.users);
+  const { me, users } = useSelector(state => state.users);
   const link = 'post/' + post._id;
 
   // delete all comments of the post and then delete the post! 
@@ -25,6 +25,17 @@ const Post = ({ postData, single }) => {
   const handleLike = () => {
     dispatch(toogleLike({ id: post._id, likes: post.likes, user: me._id }));
   }
+
+
+
+  const findName = () => {
+    var names = [];
+    likes.forEach(id => {
+      names = users.find(user => user._id === id)?.firstName;
+    });
+    console.log(names);
+    return names;
+  };
 
   if (isLoading) return <h1>Loading data...</h1>;
   return (
@@ -49,7 +60,7 @@ const Post = ({ postData, single }) => {
       </Row>
 
       <div>
-        <span onClick={handleLike}><AiFillLike /> {likes.length}</span>
+        <span onClick={handleLike}><AiFillLike /> {likes.length} { }</span>
         <AiOutlineComment /> {comments?.length}
       </div>
 

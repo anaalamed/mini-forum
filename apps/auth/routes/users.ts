@@ -5,6 +5,7 @@ import { verifyUser } from '../middlewares/verify-user'
 const usersRouter = Router();
 
 const verifyAdmin = (req, res, next) => {
+    console.log(req.user);
     if (req.user.role === 'admin') {
         next();
     } else {
