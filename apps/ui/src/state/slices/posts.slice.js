@@ -3,7 +3,7 @@ import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 export const getPosts = createAsyncThunk(
 	'posts/getPosts',
 	async () => {
-		const response = await fetch('http://localhost:4001/api/posts', {
+		const response = await fetch('https://anaalamed-mini-forum.herokuapp.com/api/posts', {
 			headers: {
 				'Content-Type': 'application/json',
 			},

@@ -18,9 +18,7 @@ const verifyUser = (req, res, next) => {
 postsRouter.get('/api/posts', getPosts);
 postsRouter.post('/api/posts', verifyUser, createPost);
 postsRouter.put('/api/posts/:postId', verifyUser, updatePost);
-// postsRouter.delete('/api/posts/:postId', verifyUser, deletePost); // the right one 
-postsRouter.delete('/api/posts/:postId', deletePost); // to verify deleting all comments when delete post 
-
+postsRouter.delete('/api/posts/:postId', verifyUser, deletePost);
 
 postsRouter.post('/api/posts/:postId', verifyUser, toggleLike);
 

@@ -46,7 +46,8 @@ export const deleteComment = async (req, res) => {
         const user = req.user;
         console.log(_id);
         console.log(user);
-        const deletedComment = await Comment.deleteOne({ _id, user });
+        // const deletedComment = await Comment.deleteOne({ _id, user }); // the right one
+        const deletedComment = await Comment.deleteOne({ _id }); // verify deleting post delete all the comments  
         res.json(deletedComment);
     } catch {
         res.status(500).json({ message: "Could not delete comment" })
