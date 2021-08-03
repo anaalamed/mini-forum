@@ -65,13 +65,13 @@ const Box = styled.div`
 const Form = styled.form`
   width: 50%;
   margin-left: 25%;
-  background: #EDFFEF;
+  background: #ebebf9;
   padding: 2rem 6rem;
   border-radius: 1rem;
   border: 3px solid midnightblue;
   &:hover {
         /* filter: brightness(90%); */
-        background: #FFFFFF;
+        background: coral;
         transition: 0.1s;
     }
 `;

@@ -34,13 +34,14 @@ const Box = styled.div`
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  background-color: coral;
+  /* background-color: coral; */
 
   h3 {
       /* margin: 0 auto; */
       width: 40%;
       text-align: center;
       padding: 1rem;
+      color: white;
   }
   h3:hover {
       background-color: midnightblue;

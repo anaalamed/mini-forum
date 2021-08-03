@@ -48,12 +48,12 @@ const Post = ({ postData, single }) => {
         <Content>{post.content}</Content>
         <span>
           {(me._id === post.user) ?
-            <Button onClick={handleDelete}><AiFillDelete /></Button> :
+            <Button onClick={handleDelete}><AiFillDelete className="icon" /></Button> :
             null
           }
 
           {(single !== true) ?
-            (<Button onClick={() => navigate(`post/${post._id}`)}><FiMoreVertical /></Button>) :
+            (<Button onClick={() => navigate(`post/${post._id}`)}><FiMoreVertical className="icon" /></Button>) :
             null}
         </span>
       </Row>
@@ -66,8 +66,9 @@ const Post = ({ postData, single }) => {
       <div>
         <span onClick={handleLike}
         // onMouseEnter={handleViewLikes}
-        ><AiFillLike /> {likes.length}</span>
-        <AiOutlineComment /> {comments?.length}
+        ><AiFillLike className="iconL" /> {likes.length}
+        </span>
+        <AiOutlineComment className="iconL" /> {comments?.length}
       </div>
 
       {/* <div>
@@ -83,41 +84,51 @@ export default Post;
 
 
 const Box = styled.div`
-      width: 65%;
-      background: #ebebf9;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      /* align-items: center; */
-      border: 2px solid blue;
-      border-radius:10px;
-      &:hover {
-        background: coral;
-        transition: 1s;
-      }
-      margin: 10px;
+  width: 65%;
+  background: #ebebf9; 
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  /* align-items: center; */
+  border: 2px solid blue;
+  border-radius:10px;
+  &:hover {
+    background: coral;
+    transition: 1s;
+  }
+
+  &:hover Button {
+    background-color: #0c0c27;
+    transition: 1s;
+  }
+  &:hover .icon {
+    color: white;
+    transition: 1s;
+  }
+  margin: 10px;
   `;
 
 const Button = styled.button`
-  background-color: #0c0c27;
-  color: white;
+  /* background-color: coral; */
+  /* color: white; */
   border-radius: 0.5rem;  
-  padding: 0.5rem;
-  `
+  padding: 0.4rem;
+  /* box-shadow: coral; */
 
+  -webkit-box-shadow: inset -1px 3px 8px 5px #1F87FF, 2px 5px 16px 0px #0B325E, 8px 9px 13px 5px rgba(0,0,0,0.5); 
+  box-shadow: inset -1px 3px 8px 5px #1F87FF, 2px 5px 16px 0px #0B325E, 8px 9px 13px 5px rgba(0,0,0,0.5);
+  `
 
 const Content = styled.p`
   font-size: 2rem;
-  color: #242475;
   font-weight: bold;
-  /* padding: 0.5rem; */
+  color: #242475;
   font-family: "Yanone Kaffeesatz";
-   margin: 0;
+  margin: 0;
   `;
 
 const Author = styled.div`
-font-size: 1rem;
-padding-left: 1rem;
+  font-size: 1rem;
 `;
 
 

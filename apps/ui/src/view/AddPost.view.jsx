@@ -63,5 +63,11 @@ const Button = styled.button`
     margin: 0 auto;
     border-top-right-radius: 1rem;
     border-bottom-right-radius: 1rem;
-    background-color: #0c0c27;
+    background-color: coral;
+
+    &:hover {
+        background-color: #0c0c27;
+        transition: 1s;
+
+    }
 `;

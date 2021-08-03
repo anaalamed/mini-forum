@@ -26,7 +26,7 @@ const Profile = ({ id }) => {
       <Box>
 
         {(Object.keys(user).length === 0) ?
-          (<Button><a href="/login">Log In</a></Button>) :
+          (<div><Button><a href="/login">Log In</a></Button></div>) :
           (<Section>
 
             <p>Name: <span className="property">{user.firstName}</span></p>
@@ -37,15 +37,20 @@ const Profile = ({ id }) => {
             {(me._id === user._id) ?
               <>
                 <p>Email: <span className="property">{user.email}</span></p>
-                <Button onClick={() => dispatch(logout())}>Log Out</Button>
+                {/* <Button onClick={() => dispatch(logout())}>Log Out</Button> */}
               </>
               : null
             }
+            <Button onClick={() => dispatch(logout())}>Log Out</Button>
           </Section>)
         }
+      </Box>
 
+      <Title>{(user.firstName) || null} Posts</Title>
+      <Box>
         {(userPosts.map(post => (<Post postData={post} />)))}
       </Box>
+
     </>
   )
 }
@@ -57,7 +62,7 @@ const Box = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
-
+  margin-bottom: 1rem
 `;
 
 const Section = styled.div`
@@ -76,10 +81,10 @@ const Section = styled.div`
   }
 
   span {
-      color: midnightblue;
-      padding: 1rem;
-      font-weight: bold;
-      font-size: 2rem;
+    color: midnightblue;
+    padding: 1rem;
+    font-weight: bold;
+    font-size: 2rem;
   }
 `;
 
