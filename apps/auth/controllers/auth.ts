@@ -27,8 +27,8 @@ export const login = async (req, res) => {
 }
 export const register = async (req, res) => {
     try {
-        const { email, password, firstName, lastName } = req.body;
-        const newUser = await User.create({ email, password, firstName, lastName });
+        const { email, password, firstName, lastName, country, about } = req.body;
+        const newUser = await User.create({ email, password, firstName, lastName, country, about });
         res.json(newUser);
     } catch {
         res.status(500).json({ message: "Could not register" })
