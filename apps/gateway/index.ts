@@ -3,9 +3,14 @@ import { createProxyMiddleware, Filter, Options, RequestHandler } from 'http-pro
 import fetch from 'node-fetch';
 import * as express from 'express';
 import * as path from 'path';
+import * as cors from 'cors';
 
-// import {} from '../ui/build';
+app.use(cors()); // go from port to port
 
+app.use((req, res, next) => {
+    res.header("Access-Control-Allow-Origin", "*");
+    next();
+});
 
 app.use(['/api/comments', '/api/posts'], async function checkAuth(req, res, next) {
     try {
@@ -22,13 +27,9 @@ app.use(['/api/comments', '/api/posts'], async function checkAuth(req, res, next
     next();
 })
 app.use('/api/comments', createProxyMiddleware({ target: 'http://localhost:4002', changeOrigin: true }));
-app.use('/api/posts', createProxyMiddleware({ target: 'http://localhost:4001', changeOrigin: true }));
-app.use(['/api/users', '/api/me', '/api/register', '/api/change-password', '/api/login', '/api/logout'], createProxyMiddleware({ target: 'https://anaalamed-mini-forum.herokuapp.com', changeOrigin: true }));
+app.use('/api/posts', createProxyMiddleware({ target: 'http://[::1]:4000', changeOrigin: true }));
+app.use(['/api/users', '/api/me', '/api/register', '/api/change-password', '/api/login', '/api/logout'], createProxyMiddleware({ target: 'https://[::1]:4000', changeOrigin: true }));
 
-// app.use(express.static('.../ui/build'));
-// app.get('*', (req, res) => {
-//     res.sendFile(path.join(__dirname, '.../ui/build/index.html'));
-// })
 
 app.use(express.static(path.resolve(__dirname, '../../ui/build')));
 app.get('*', (req, res) => {
