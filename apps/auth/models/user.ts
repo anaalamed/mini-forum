@@ -22,6 +22,12 @@ const UserSchema = new Schema({
         enum: ["user", "admin"],
         default: () => "user"
     },
+    country: {
+        type: String,
+    },
+    about: {
+        type: String
+    },
     created: {
         default: Date.now,
         type: Date
