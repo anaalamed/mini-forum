@@ -3,14 +3,11 @@ import { createProxyMiddleware, Filter, Options, RequestHandler } from 'http-pro
 import fetch from 'node-fetch';
 import * as express from 'express';
 import * as path from 'path';
-import * as cors from 'cors';
 
-app.use(cors()); // go from port to port
-
-app.use((req, res, next) => {
-    res.header("Access-Control-Allow-Origin", "*");
-    next();
-});
+// app.use((req, res, next) => {
+//     res.header("Access-Control-Allow-Origin", "*");
+//     next();
+// });
 
 app.use(['/api/comments', '/api/posts'], async function checkAuth(req, res, next) {
     try {
@@ -28,7 +25,7 @@ app.use(['/api/comments', '/api/posts'], async function checkAuth(req, res, next
 })
 app.use('/api/comments', createProxyMiddleware({ target: 'http://localhost:4002', changeOrigin: true }));
 app.use('/api/posts', createProxyMiddleware({ target: 'http://localhost:4001', changeOrigin: true }));
-app.use(['/api/users', '/api/me', '/api/register', '/api/change-password', '/api/login', '/api/logout'], createProxyMiddleware({ target: 'http://localhost:4000', changeOrigin: true }));
+app.use(['/api/users', '/api/me', '/api/register', '/api/change-password', '/api/login', '/api/logout'], createProxyMiddleware({ target: 'http://localhost:4000', changeOrigin: true, secure: false }));
 
 
 app.use(express.static(path.resolve(__dirname, '../../ui/build')));
