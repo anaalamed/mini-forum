@@ -14,7 +14,7 @@ const Post = ({ postData, single }) => {
   const { comments, likes } = useSelector(state => state.posts.posts.find(item => item._id === post._id));
   const { me, users } = useSelector(state => state.users);
 
-  var whoLiked = [];
+  // var whoLiked = [];
 
   // delete all comments of the post and then delete the post! 
   const handleDelete = () => {
@@ -26,20 +26,20 @@ const Post = ({ postData, single }) => {
     dispatch(toogleLike({ id: post._id, likes: post.likes, user: me._id }));
   }
 
-  const handleViewLikes = () => {
-    const likes = findName();
-    alert(likes);
-    whoLiked = likes;
-  }
+  // const handleViewLikes = () => {
+  //   const likes = findName();
+  //   alert(likes);
+  //   whoLiked = likes;
+  // }
 
-  const findName = () => {
-    var names = [];
-    likes.forEach(id => {
-      names.push(users.find(user => user._id === id)?.firstName);
-    });
-    // console.log(names);
-    return names;
-  };
+  // const findName = () => {
+  //   var names = [];
+  //   likes.forEach(id => {
+  //     names.push(users.find(user => user._id === id)?.firstName);
+  //   });
+  //   // console.log(names);
+  //   return names;
+  // };
 
   if (isLoading) return <h1>Loading data...</h1>;
   return (

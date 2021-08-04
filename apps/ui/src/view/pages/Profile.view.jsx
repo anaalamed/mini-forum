@@ -38,10 +38,10 @@ const Profile = ({ id }) => {
               <>
                 <p>Email: <span className="property">{user.email}</span></p>
                 {/* <Button onClick={() => dispatch(logout())}>Log Out</Button> */}
+                <Button onClick={() => dispatch(logout())}>Log Out</Button>
               </>
               : null
             }
-            <Button onClick={() => dispatch(logout())}>Log Out</Button>
           </Section>)
         }
       </Box>
@@ -66,7 +66,7 @@ const Box = styled.div`
 `;
 
 const Section = styled.div`
-  background-color: #EDFFEF;
+  background-color: #ebebf9;
   margin-top: 1rem;
   width: 50%;
   display: flex;

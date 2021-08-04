@@ -20,6 +20,7 @@ const routes = {
     '/login': () => <LogIn />,
     '/me': (userId) => <Profile id={userId} />,
     '/users': () => <Users />,
+    '/user/post/:postId': ({ postId }) => <SinglePost postId={postId} />,
     '/post/:postId': ({ postId }) => <SinglePost postId={postId} />,
     '/post/:postId/comments': ({ postId }) => <Comments postId={postId} />,
     '/user/:userId': ({ userId }) => <Profile id={userId} />
@@ -34,7 +35,8 @@ const App = () => {
 
     useEffect(() => {
         posts.map(post => dispatch(getComments(post._id)));
-    }, []);
+    }, [posts.length]);
+
 
 
     return (
