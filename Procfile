@@ -1,0 +1,1 @@
+web: node apps/auth & node apps/posts & node apps/comments
