@@ -11,4 +11,4 @@ connect(MONGO_URI)
 app.use(cookieParser())
 app.use(authRouter);
 app.use(usersRouter); // admin
-app.listen(PORT, () => console.log('Authentication app is running!'))
+app.listen(process.env.PORT || PORT, () => console.log('Authentication app is running!'))

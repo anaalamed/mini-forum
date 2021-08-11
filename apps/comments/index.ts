@@ -8,4 +8,4 @@ connect(process.env.MONGODB_URI || 'mongodb://localhost:27017/comments')
 
 app.use(commentsRouter)
 
-app.listen(4002, () => console.log('Comments app is running!'))
+app.listen(process.env.PORT || 4002, () => console.log('Comments app is running!'))

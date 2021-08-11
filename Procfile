@@ -1,1 +1,1 @@
-web: node apps/auth & node apps/posts & node apps/comments
+web: node apps/gateway & node apps/auth & node apps/posts & node apps/comments
