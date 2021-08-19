@@ -4,7 +4,7 @@ export const login  = createAsyncThunk(
 	'users/login',
 	async (payload) => {
     console.log(payload);
-		const response = await fetch('https://anaalamed-mini-forum.herokuapp.com/api/login', {
+		const response = await fetch('https://anaalamed-forum-auth.herokuapp.com/api/login', {
 			method: 'POST',
 			headers: {
 				'Content-Type': 'application/json',
@@ -24,7 +24,7 @@ export const logout  = createAsyncThunk(
     'users/logout',
     async (payload) => {
       console.log(payload);
-      const response = await fetch('https://anaalamed-mini-forum.herokuapp.com/api/logout', {
+      const response = await fetch('https://anaalamed-forum-auth.herokuapp.com/api/logout', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -39,7 +39,7 @@ export const logout  = createAsyncThunk(
     'users/registration',
     async (payload) => {
       console.log(payload);
-      const response = await fetch('https://anaalamed-mini-forum.herokuapp.com/api/register', {
+      const response = await fetch('https://anaalamed-forum-auth.herokuapp.com/api/register', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -63,7 +63,7 @@ export const logout  = createAsyncThunk(
     'users/getUsers',
     async (payload) => {
       console.log(payload);
-      const response = await fetch('https://anaalamed-mini-forum.herokuapp.com/api/users', {
+      const response = await fetch('https://anaalamed-forum-auth.herokuapp.com/api/users', {
         headers: {
           'Content-Type': 'application/json',
         },

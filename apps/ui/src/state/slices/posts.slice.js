@@ -3,7 +3,8 @@ import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 export const getPosts = createAsyncThunk(
 	'posts/getPosts',
 	async () => {
-		const response = await fetch('https://anaalamed-mini-forum.herokuapp.com/api/posts', {
+		const response = await fetch('https://anaalamed-forum-posts.herokuapp.com/api/posts', {
+		// const response = await fetch('http://localhost:4001/api/posts', {
 			headers: {
 				'Content-Type': 'application/json',
 			},
@@ -18,7 +19,7 @@ export const getPosts = createAsyncThunk(
 export const addPostAsync = createAsyncThunk(
 	'posts/addPostAsync',
 	async (payload) => {
-		const response = await fetch('https://anaalamed-mini-forum.herokuapp.com/api/posts', {
+		const response = await fetch('https://anaalamed-forum-posts.herokuapp.com/api/posts', {
 			method: 'POST',
 			headers: {
 				'Content-Type': 'application/json',
@@ -36,7 +37,7 @@ export const addPostAsync = createAsyncThunk(
 export const deletePostAsync = createAsyncThunk(
 	'posts/deletePostAsync',
 	async (payload) => {
-		const response = await fetch(`https://anaalamed-mini-forum.herokuapp.com/api/posts/${payload._id}`, {
+		const response = await fetch(`https://anaalamed-forum-posts.herokuapp.com/api/posts/${payload._id}`, {
 			method: 'DELETE',
 			headers: {
 				'Content-Type': 'application/json',
@@ -54,7 +55,7 @@ export const getComments = createAsyncThunk(
 	'posts/comments/getComments',
 	async (payload) => {
         // console.log(payload);
-		const response = await fetch(`https://anaalamed-mini-forum.herokuapp.com/api/comments?entity=${payload}`, {
+		const response = await fetch(`https://anaalamed-forum-comments.herokuapp.com/api/comments?entity=${payload}`, {
 			headers: {
 				'Content-Type': 'application/json',
 			},
@@ -70,7 +71,7 @@ export const addComment = createAsyncThunk(
 	'posts/comments/addComment',
 	async (payload) => {
         console.log(payload);
-		const response = await fetch(`https://anaalamed-mini-forum.herokuapp.com/api/comments`, {
+		const response = await fetch(`https://anaalamed-forum-comments.herokuapp.com/api/comments`, {
 			method: 'POST',
             headers: {
 				'Content-Type': 'application/json',
@@ -90,7 +91,7 @@ export const addComment = createAsyncThunk(
 export const deleteComment = createAsyncThunk(
 	'comments/deleteComment',
 	async (payload) => {
-		const response = await fetch(`https://anaalamed-mini-forum.herokuapp.com/api/comments/${payload.id}`, {
+		const response = await fetch(`https://anaalamed-forum-comments.herokuapp.com/api/comments/${payload.id}`, {
 			method: 'DELETE',
     	    headers: {
 				'Content-Type': 'application/json',
@@ -108,8 +109,7 @@ export const toogleLike = createAsyncThunk(
 'posts/addLikeAsync',
 async (payload) => {
 	console.log(payload);
-	const response = await fetch(`https://anaalamed-mini-forum.herokuapp.com/api/posts/${payload.id}`, {
-		method: 'POST',
+		const response = await fetch('https://anaalamed-forum-posts.herokuapp.com/api/posts', {
 		headers: {
 			'Content-Type': 'application/json',
 			'user':  (payload.user),

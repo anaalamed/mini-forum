@@ -19,7 +19,7 @@ app.use(['/api/comments', '/api/posts'], async function checkAuth(req, res, next
     next();
 })
 app.use('/api/comments', createProxyMiddleware({ target: 'http://localhost:4002', changeOrigin: true }));
-app.use('/api/posts', createProxyMiddleware({ target: 'http://localhost:4001', changeOrigin: true }));
+app.use('/api/posts', createProxyMiddleware({ target: 'http://localhost:4000', changeOrigin: true }));
 app.use(['/api/users', '/api/me', '/api/register', '/api/login', '/api/logout'], createProxyMiddleware({ target: 'http://localhost:4000', changeOrigin: true }));
 
 // serve UI
